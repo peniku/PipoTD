@@ -34,32 +34,45 @@ func _process(_delta: float) -> void:
 func _setup_defense() -> void:
 	var gs = GameState
 	gs.gold = 100000  # dinheiro infinito para o teste
-	var slots: Array = []
-	for c in main.get_children():
-		if c is BuildSlot:
-			slots.append(c)
-	_check(slots.size() > 0, "mapa tem slots")
-	# Constrói Arqueiros e Catapultas em alternância
-	for i in range(min(10, slots.size())):
-		main._select_slot(slots[i])
+	var grid: BuildGrid = main.grid
+	var cells: Array = grid.buildable_cells()
+	_check(cells.size() > 100, "grade tem muitas células construíveis (%d)" % cells.size())
+	# Nenhuma célula construível pode encostar na estrada
+	var pts: Array = []
+	for p in main.map_data["path"]:
+		pts.append(Vector2(p[0], p[1]))
+	var min_d: float = INF
+	for c in cells:
+		min_d = minf(min_d, BuildGrid._dist_to_polyline(grid.cell_center_2d(c), pts))
+	_check(min_d >= 2.0, "células longe da estrada (mín %.1f m)" % min_d)
+	# Escolhe as 10 células mais próximas da estrada (onde as torres alcançam)
+	cells.sort_custom(func(a, b): return BuildGrid._dist_to_polyline(grid.cell_center_2d(a), pts) \
+			< BuildGrid._dist_to_polyline(grid.cell_center_2d(b), pts))
+	var chosen: Array = cells.slice(0, 10)
+	for i in chosen.size():
+		main._select_cell(chosen[i])
 		main._on_build("arqueiros" if i % 2 == 0 else "catapulta")
-		_check(slots[i].tower != null, "torre construída no slot %d" % i)
+		_check(grid.tower_at(chosen[i]) != null, "torre construída na célula %s" % str(chosen[i]))
+	# Célula ocupada não aceita outra torre
+	main._select_cell(chosen[0])
+	var gold_before_dup: int = gs.gold
+	main._on_build("arqueiros")
+	_check(gs.gold == gold_before_dup, "não constrói em célula ocupada")
 	# Compra Ordens e evolui
 	gs.favor = 3
 	_check(gs.upgrade_order("fogo"), "comprou Fogo")
 	_check(gs.upgrade_order("pedra"), "comprou Pedra")
-	main._select_slot(slots[0])
+	main._select_cell(chosen[0])
 	main._on_upgrade("fogo_1")
-	_check(slots[0].tower.tower_id == "fogo_1", "evoluiu para fogo_1")
-	main._select_slot(slots[0])
+	_check(grid.tower_at(chosen[0]).tower_id == "fogo_1", "evoluiu para fogo_1")
 	main._on_upgrade("fogo_pedra")
-	_check(slots[0].tower.tower_id == "fogo_pedra", "evoluiu para a Dual fogo_pedra")
+	_check(grid.tower_at(chosen[0]).tower_id == "fogo_pedra", "evoluiu para a Dual fogo_pedra")
 	# Vende uma torre
 	var gold_before: int = gs.gold
-	main._select_slot(slots[9])
+	main._select_cell(chosen[9])
 	main._on_sell()
-	_check(slots[9].tower == null and gs.gold > gold_before, "vendeu torre e recebeu ouro")
-	main._select_slot(null)
+	_check(grid.tower_at(chosen[9]) == null and gs.gold > gold_before, "vendeu torre e recebeu ouro")
+	main._select_cell(null)
 
 
 func _check(cond: bool, label: String) -> void:

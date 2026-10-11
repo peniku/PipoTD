@@ -4,7 +4,7 @@
 **Dados:** `data/towers.json` · lista e árvore de design em [../towers.md](../towers.md)
 
 ## Ciclo de vida
-1. **Construir** (`main._on_build`): só torres com `tier: "base"`. Cobra `cost`, cria `Tower` filha do slot.
+1. **Construir** (`main._on_build`): só torres com `tier: "base"`. Cobra `cost`, coloca a `Tower` na célula selecionada da grade (`BuildGrid.place_tower`).
 2. **Atirar** (`_process`): quando o tempo de recarga zera, procura alvo; se achar, cria um projétil e recarrega por `1 / attack_speed` segundos.
 3. **Evoluir** (`main._on_upgrade`): o painel lista `upgrades_to`. Exige `requires` (níveis de Ordem) e cobra o `cost` cheio da torre nova (decisão D-008). A torre troca de `tower_id` no lugar.
 4. **Vender** (`main._on_sell`): devolve `total_spent × sell_refund` (75%).

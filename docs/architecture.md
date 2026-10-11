@@ -11,7 +11,7 @@ PipoTd/
 │   ├── towers.json          # as 35 torres
 │   ├── elements.json        # Ordens, roda de fraquezas, cores
 │   ├── economy.json         # ouro, vidas, juros, ondas
-│   └── maps/map_01.json     # rota e slots do mapa
+│   └── maps/map_01.json     # rota e grade de construção do mapa
 ├── scenes/
 │   └── main.tscn            # cena da partida (só um Node3D com main.gd)
 ├── scripts/
@@ -20,12 +20,12 @@ PipoTd/
 │   │   └── game_state.gd    # GameState: ouro, vidas, onda, Favor, Ordens
 │   ├── world/
 │   │   ├── main.gd          # monta o mundo, câmera, entrada do jogador
-│   │   └── wave_manager.gd  # gera e solta as ondas
+│   │   ├── wave_manager.gd  # gera e solta as ondas
+│   │   └── build_grid.gd    # grade de construção em volta da rota
 │   ├── entities/
 │   │   ├── enemy.gd         # inimigo (PathFollow3D)
 │   │   ├── tower.gd         # torre
-│   │   ├── projectile.gd    # projétil
-│   │   └── build_slot.gd    # lugar de construção clicável
+│   │   └── projectile.gd    # projétil
 │   └── ui/
 │       └── hud.gd           # interface da partida
 ├── tests/
@@ -55,9 +55,9 @@ Main (Node3D, main.gd)
 ├── Route (Path3D)              ← rota fixa
 │   └── Enemy ×N (PathFollow3D) ← inimigos andam aqui
 ├── segmentos da estrada, marcadores entrada/saída
-├── BuildSlot ×29 (StaticBody3D)
-│   └── Tower (quando construída)
-├── Projectile ×N               ← filhos do slot da torre que disparou
+├── BuildGrid (Node3D)          ← grade, cursor e marcador de seleção
+│   ├── Tower ×N                ← torres construídas
+│   └── Projectile ×N           ← projéteis das torres
 ├── Camera3D
 ├── WaveManager (Node)
 └── HUD (CanvasLayer)
@@ -66,8 +66,8 @@ Main (Node3D, main.gd)
 ## Fluxo de uma partida
 
 1. `main.gd._ready()` lê o mapa, chama `GameState.reset()` e monta mundo, câmera, `WaveManager` e `HUD`.
-2. Jogador clica num slot → `_pick_slot` (raio da câmera na camada 2) → HUD mostra "construir".
-3. Construir → `GameState.spend(custo)` → cria `Tower` filha do slot.
+2. Jogador clica no chão → `_pick_cell` (raio da câmera × plano do chão) → célula livre: HUD mostra "construir"; célula com torre: painel da torre.
+3. Construir → `GameState.spend(custo)` → `BuildGrid.place_tower(célula, torre)`.
 4. Espaço/botão → `WaveManager.start_next_wave()` → calcula a onda com `describe_wave(n)` e solta inimigos no `Path3D`.
 5. A cada frame cada `Tower` procura o inimigo mais adiantado no alcance e cria um `Projectile`.
 6. Projétil chega → `Enemy.take_hit()` → aplica multiplicador de Ordem, armadura e habilidade.

@@ -1,5 +1,5 @@
 {
-  "_doc": "Mapa 1. Coordenadas em metros no plano X/Z (Y = altura). Ver docs/systems/map.md.",
+  "_doc": "Mapa 1. Coordenadas em metros no plano X/Z (Y = altura). A grade de construção cobre todo o chão, menos a estrada. Ver docs/systems/map.md.",
   "id": "map_01",
   "name": "Vale do Rei",
   "ground_size": [
@@ -33,122 +33,10 @@
     ]
   ],
   "path_width": 2.4,
-  "slots": [
-    [
-      -14,
-      -6
-    ],
-    [
-      -10,
-      -6
-    ],
-    [
-      -6,
-      -6
-    ],
-    [
-      -2,
-      -6
-    ],
-    [
-      2,
-      -6
-    ],
-    [
-      6,
-      -6
-    ],
-    [
-      -14,
-      -14
-    ],
-    [
-      -6,
-      -14
-    ],
-    [
-      2,
-      -14
-    ],
-    [
-      14,
-      -6
-    ],
-    [
-      14,
-      -14
-    ],
-    [
-      14,
-      2
-    ],
-    [
-      6,
-      4
-    ],
-    [
-      2,
-      4
-    ],
-    [
-      -2,
-      4
-    ],
-    [
-      -6,
-      4
-    ],
-    [
-      -14,
-      4
-    ],
-    [
-      -14,
-      0
-    ],
-    [
-      -6,
-      -4
-    ],
-    [
-      -2,
-      -4
-    ],
-    [
-      2,
-      -4
-    ],
-    [
-      6,
-      -4
-    ],
-    [
-      -6,
-      14
-    ],
-    [
-      0,
-      14
-    ],
-    [
-      6,
-      14
-    ],
-    [
-      12,
-      14
-    ],
-    [
-      -6,
-      6
-    ],
-    [
-      0,
-      6
-    ],
-    [
-      6,
-      6
-    ]
-  ]
+  "build_grid": {
+    "cell_size": 2.0,
+    "road_clearance": 0.0,
+    "end_clearance": 3.0,
+    "blocked_cells": []
+  }
 }

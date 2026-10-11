@@ -16,7 +16,8 @@ Legenda: `[x]` feito · `[ ]` a fazer · `[~]` em andamento
 
 ## Fase 1 — Base jogável ✅
 - [x] Mapa a partir de JSON: chão, rota fixa (Path3D), estrada, entrada/saída ([systems/map.md](systems/map.md))
-- [x] Slots de construção clicáveis
+- [x] Slots de construção clicáveis (substituído pela grade, ver abaixo)
+- [x] Grade de construção estilo Element TD: qualquer célula livre em volta da rota, cursor verde/vermelho ([systems/map.md](systems/map.md))
 - [x] Câmera: mover (WASD/setas) e zoom (roda do mouse)
 - [x] Inimigos andando na rota, com vida, Ordem, armadura e regeneração ([systems/enemies.md](systems/enemies.md))
 - [x] Barra de vida dos inimigos
@@ -42,6 +43,10 @@ Legenda: `[x]` feito · `[ ]` a fazer · `[~]` em andamento
 - [ ] Plugin no editor Godot com tabela de todas as torres
 - [ ] Simulador: rodar N ondas sem tela com uma build e mostrar até onde chega
 
+## Tema e universo
+- [ ] Decidir se o tema segue inspiração D&D (conteúdo SRD) — proposta em [ideas/tema-dnd.md](ideas/tema-dnd.md)
+- [ ] Se sim: renomear Ordens, torres e facções inimigas com vocabulário D&D/SRD
+
 ## Fase 3 — Conteúdo das torres
 - [ ] Implementar habilidades únicas das 15 Duais (hoje todas são `"todo"`) — ver [towers.md](towers.md)
 - [ ] Prioridades de mira configuráveis (primeiro, mais forte, mais perto)
@@ -59,7 +64,7 @@ Legenda: `[x]` feito · `[ ]` a fazer · `[~]` em andamento
 ## Fase 5 — Visual 3D
 - [ ] Decidir estilo visual (low poly estilizado × realista)
 - [ ] Modelos das torres por camada e Ordem
-- [ ] Mapa decorado (castelo, árvores, rochas)
+- [ ] Mapa decorado (castelo, árvores, rochas) — usar `blocked_cells` onde houver decoração
 - [ ] Efeitos de projétil, impacto e morte
 - [ ] Sons e música
 

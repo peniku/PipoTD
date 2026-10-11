@@ -1,6 +1,6 @@
 extends Node3D
 ## Cena principal da partida. Monta o mundo a partir de data/maps/<map>.json
-## (chão, rota, slots, câmera, luz), cria o WaveManager e o HUD, e trata a
+## (chão, rota, grade de construção, câmera, luz), cria o WaveManager e o HUD, e trata a
 ## entrada do jogador (cliques, teclas, câmera). Ver docs/architecture.md.
 
 @export var map_id: String = "map_01"
@@ -17,7 +17,9 @@ var hud: HUD
 var camera: Camera3D
 var _cam_target: Vector3 = Vector3.ZERO
 var _cam_height: float = 28.0
-var _selected_slot: BuildSlot = null
+var grid: BuildGrid
+var _selected_cell: Vector2i = Vector2i(-1, -1)
+var _has_selection: bool = false
 
 
 func _ready() -> void:
@@ -26,7 +28,7 @@ func _ready() -> void:
 	_build_environment()
 	_build_ground()
 	_build_path()
-	_build_slots()
+	_build_grid()
 	_build_camera()
 
 	waves = WaveManager.new()
@@ -127,11 +129,11 @@ func _add_marker(pos: Vector3, color: Color) -> void:
 	add_child(m)
 
 
-func _build_slots() -> void:
-	for s in map_data.get("slots", []):
-		var slot := BuildSlot.new()
-		slot.position = Vector3(float(s[0]), 0.0, float(s[1]))
-		add_child(slot)
+func _build_grid() -> void:
+	grid = BuildGrid.new()
+	grid.name = "BuildGrid"
+	add_child(grid)
+	grid.setup(map_data)
 
 
 func _build_camera() -> void:
@@ -157,15 +159,18 @@ func _process(delta: float) -> void:
 	if move != Vector3.ZERO:
 		_cam_target += move.normalized() * CAM_PAN_SPEED * delta
 		_update_camera()
+	# Cursor da grade segue o mouse
+	var mouse_cell = _pick_cell(get_viewport().get_mouse_position())
+	grid.show_hover(mouse_cell if mouse_cell != null else Vector2i(-1, -1), mouse_cell != null)
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
-				_select_slot(_pick_slot(event.position))
+				_select_cell(_pick_cell(event.position))
 			MOUSE_BUTTON_RIGHT:
-				_select_slot(null)
+				_select_cell(null)
 			MOUSE_BUTTON_WHEEL_UP:
 				_cam_height = clampf(_cam_height - CAM_ZOOM_STEP, CAM_MIN_HEIGHT, CAM_MAX_HEIGHT)
 				_update_camera()
@@ -177,34 +182,49 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_SPACE:
 				_on_start_wave()
 			KEY_ESCAPE:
-				_select_slot(null)
+				_select_cell(null)
 			KEY_F5:
 				GameData.reload()  # recarrega data/*.json sem fechar o jogo
 
 
-func _pick_slot(screen_pos: Vector2) -> BuildSlot:
+## Célula da grade sob a posição de tela (raio da câmera × plano do chão), ou null.
+func _pick_cell(screen_pos: Vector2):
 	var from: Vector3 = camera.project_ray_origin(screen_pos)
-	var to: Vector3 = from + camera.project_ray_normal(screen_pos) * 500.0
-	var query := PhysicsRayQueryParameters3D.create(from, to)
-	query.collision_mask = 1 << (BuildSlot.PICK_LAYER - 1)
-	var hit: Dictionary = get_world_3d().direct_space_state.intersect_ray(query)
-	if hit.is_empty():
+	var dir: Vector3 = camera.project_ray_normal(screen_pos)
+	var hit = Plane(Vector3.UP, 0.0).intersects_ray(from, dir)
+	if hit == null:
 		return null
-	return hit["collider"] as BuildSlot
+	var c: Vector2i = grid.world_to_cell(hit)
+	if not grid._in_bounds(c):
+		return null
+	return c
 
 
-func _select_slot(slot: BuildSlot) -> void:
-	if _selected_slot and is_instance_valid(_selected_slot):
-		_selected_slot.set_selected(false)
-	_selected_slot = slot
-	if slot == null:
+## Seleciona uma célula (null = limpar). Célula com torre → painel da torre;
+## célula livre → painel de construção; célula bloqueada → limpa a seleção.
+func _select_cell(cell) -> void:
+	if _has_selection:
+		var old: Tower = grid.tower_at(_selected_cell)
+		if old:
+			old.set_selected(false)
+	_has_selection = false
+	grid.show_selected(Vector2i.ZERO, false)
+	if cell == null:
 		hud.clear_selection()
 		return
-	slot.set_selected(true)
-	if slot.is_empty():
-		hud.show_empty_slot()
+	var c: Vector2i = cell
+	var tower: Tower = grid.tower_at(c)
+	if tower == null and not grid.is_free(c):
+		hud.clear_selection()
+		return
+	_selected_cell = c
+	_has_selection = true
+	grid.show_selected(c, true)
+	if tower:
+		tower.set_selected(true)
+		hud.show_tower(tower)
 	else:
-		hud.show_tower(slot.tower)
+		hud.show_empty_cell()
 
 
 # --- Ações do jogador -------------------------------------------------------
@@ -223,20 +243,22 @@ func _refresh_wave_button() -> void:
 
 
 func _on_build(tower_id: String) -> void:
-	if _selected_slot == null or not _selected_slot.is_empty():
+	if not _has_selection or not grid.is_free(_selected_cell):
 		return
 	var cost: int = int(GameData.get_tower(tower_id).get("cost", 0))
 	if not GameState.spend(cost):
 		return
 	var tower := Tower.new()
 	tower.setup(tower_id, cost)
-	_selected_slot.add_child(tower)
-	_selected_slot.tower = tower
-	_select_slot(_selected_slot)
+	grid.place_tower(_selected_cell, tower)
+	_select_cell(_selected_cell)
 
 
 func _on_upgrade(new_id: String) -> void:
-	if _selected_slot == null or _selected_slot.is_empty():
+	if not _has_selection:
+		return
+	var tower: Tower = grid.tower_at(_selected_cell)
+	if tower == null:
 		return
 	var t: Dictionary = GameData.get_tower(new_id)
 	if not GameState.meets_requirements(t.get("requires", {})):
@@ -244,19 +266,20 @@ func _on_upgrade(new_id: String) -> void:
 	var cost: int = int(t.get("cost", 0))
 	if not GameState.spend(cost):
 		return
-	_selected_slot.tower.upgrade_to(new_id, cost)
-	_select_slot(_selected_slot)
+	tower.upgrade_to(new_id, cost)
+	_select_cell(_selected_cell)
 
 
 func _on_sell() -> void:
-	if _selected_slot == null or _selected_slot.is_empty():
+	if not _has_selection:
 		return
-	var tower: Tower = _selected_slot.tower
+	var tower: Tower = grid.remove_tower(_selected_cell)
+	if tower == null:
+		return
 	var refund: int = int(tower.total_spent * float(GameData.economy.get("sell_refund", 0.75)))
 	tower.queue_free()
-	_selected_slot.tower = null
 	GameState.earn(refund)
-	_select_slot(_selected_slot)
+	_select_cell(_selected_cell)
 
 
 func _on_game_over(wave_reached: int) -> void:

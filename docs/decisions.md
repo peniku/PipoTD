@@ -2,6 +2,9 @@
 
 Cada decisão importante, com data e motivo. Nova decisão = nova entrada no topo.
 
+## D-010 · 2026-10-11 · Grade de construção em vez de lugares fixos
+Como no Element TD, o chão em volta da rota é uma grade de células de 2 m e o jogador constrói em qualquer célula livre. Dá muito mais liberdade de posicionamento (248 células no mapa 1, antes 29). A grade é calculada a partir da rota, então mapas novos não precisam listar lugares à mão.
+
 ## D-009 · 2026-10-11 · Dual usa a primeira Ordem como tipo de dano
 Torres Duais têm duas Ordens, mas o dano usa só a primeira da lista (`element[0]`) para o multiplicador. Simples e previsível. A segunda Ordem aparece nas habilidades únicas (Fase 3).
 

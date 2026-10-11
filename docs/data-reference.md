@@ -71,4 +71,4 @@ Todos os números do jogo ficam em `data/`. Depois de editar, aperte **F5** com 
 ---
 
 ## `data/maps/<id>.json`
-Ver [systems/map.md](systems/map.md): `id`, `name`, `ground_size`, `path`, `path_width`, `slots`.
+Ver [systems/map.md](systems/map.md): `id`, `name`, `ground_size`, `path`, `path_width`, `build_grid` (`cell_size`, `road_clearance`, `end_clearance`, `blocked_cells`).

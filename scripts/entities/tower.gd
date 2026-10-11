@@ -1,6 +1,6 @@
 extends Node3D
 class_name Tower
-## Torre construída num slot. Todos os números (dano, velocidade, alcance…)
+## Torre construída numa célula da grade (BuildGrid). Todos os números (dano, velocidade, alcance…)
 ## são lidos de GameData a cada disparo, então mudar towers.json + recarregar
 ## altera torres já construídas. Ver docs/systems/towers.md.
 

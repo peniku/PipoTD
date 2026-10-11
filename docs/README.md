@@ -29,13 +29,18 @@ Mapa de toda a documentação. Comece por aqui.
 ## Sistemas (como cada parte funciona no código)
 | Documento | Sistema |
 |---|---|
-| [systems/map.md](systems/map.md) | Mapa, rota fixa e slots de construção |
+| [systems/map.md](systems/map.md) | Mapa, rota fixa e grade de construção |
 | [systems/enemies.md](systems/enemies.md) | Inimigos: movimento, vida, armadura, efeitos |
 | [systems/waves.md](systems/waves.md) | Geração das ondas e fórmulas |
 | [systems/towers.md](systems/towers.md) | Torres: mira, disparo, evolução, venda |
 | [systems/combat.md](systems/combat.md) | Cálculo de dano, multiplicadores de Ordem, habilidades |
 | [systems/economy.md](systems/economy.md) | Ouro, juros, vidas, Favor Real, Ordens |
 | [systems/hud.md](systems/hud.md) | Interface da partida |
+
+## Ideias em discussão
+| Documento | O que tem |
+|---|---|
+| [ideas/tema-dnd.md](ideas/tema-dnd.md) | Proposta de universo inspirado em D&D (SRD) |
 
 ## Manual
 | Documento | Para quem |

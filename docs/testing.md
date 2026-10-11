@@ -4,12 +4,13 @@
 **Arquivos:** `tests/smoke_test.tscn` + `tests/smoke_test.gd`
 
 Abre a partida sem tela, com ouro infinito, e confere:
-1. o mapa tem slots;
-2. constrói 10 torres (Arqueiros e Catapultas);
-3. compra Fogo e Pedra e evolui uma torre até `fogo_1` e depois até a Dual `fogo_pedra`;
-4. vende uma torre e recebe ouro;
-5. roda 6 ondas até o fim;
-6. o castelo sobrevive.
+1. a grade tem mais de 100 células construíveis e nenhuma encosta na estrada;
+2. constrói 10 torres (Arqueiros e Catapultas) nas células mais perto da estrada;
+3. não deixa construir em célula ocupada;
+4. compra Fogo e Pedra e evolui uma torre até `fogo_1` e depois até a Dual `fogo_pedra`;
+5. vende uma torre e recebe ouro;
+6. roda 6 ondas até o fim;
+7. o castelo sobrevive.
 
 ### Rodar
 Na pasta do projeto:

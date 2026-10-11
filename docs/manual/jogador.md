@@ -6,7 +6,7 @@ Impedir que os inimigos cheguem ao castelo (marcador vermelho). Eles entram pelo
 ## Controles
 | Ação | Comando |
 |---|---|
-| Selecionar slot ou torre | clique esquerdo |
+| Selecionar um lugar ou uma torre | clique esquerdo |
 | Cancelar seleção | clique direito ou Esc |
 | Iniciar a próxima onda | Espaço ou botão "Iniciar onda" |
 | Mover a câmera | W A S D ou setas |
@@ -14,7 +14,7 @@ Impedir que os inimigos cheguem ao castelo (marcador vermelho). Eles entram pelo
 | Recarregar números (`data/*.json`) | F5 |
 
 ## Como jogar
-1. Clique numa placa cinza (slot) e construa **Arqueiros** (alvo único, barato) ou **Catapulta** (dano em área).
+1. Clique em qualquer quadrado claro em volta da estrada (o cursor fica verde) e construa **Arqueiros** (alvo único, barato) ou **Catapulta** (dano em área).
 2. Inicie a onda. Cada inimigo morto dá ouro.
 3. No fim de cada onda você recebe **juros** sobre o ouro guardado.
 4. Você começa com 1 **Favor Real** e ganha mais um a cada 5 ondas. Use na barra de baixo para comprar ou subir uma **Ordem**.

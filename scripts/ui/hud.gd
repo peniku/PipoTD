@@ -19,7 +19,7 @@ var _orders_box: HBoxContainer
 var _message: Label
 var _wave_info: Label
 var _current_tower: Tower = null
-var _showing_empty_slot: bool = false
+var _showing_empty_cell: bool = false
 
 
 func _ready() -> void:
@@ -104,8 +104,8 @@ func refresh() -> void:
 	_refresh_orders()
 	if _current_tower != null and is_instance_valid(_current_tower):
 		show_tower(_current_tower)
-	elif _showing_empty_slot:
-		show_empty_slot()
+	elif _showing_empty_cell:
+		show_empty_cell()
 
 
 func set_wave_button(enabled: bool, next_info: Dictionary) -> void:
@@ -134,13 +134,13 @@ func _refresh_orders() -> void:
 
 func clear_selection() -> void:
 	_current_tower = null
-	_showing_empty_slot = false
+	_showing_empty_cell = false
 	_panel.visible = false
 
 
-func show_empty_slot() -> void:
+func show_empty_cell() -> void:
 	_current_tower = null
-	_showing_empty_slot = true
+	_showing_empty_cell = true
 	_clear_panel()
 	_add_title("Construir torre")
 	for id in GameData.towers:
@@ -158,7 +158,7 @@ func show_empty_slot() -> void:
 
 func show_tower(tower: Tower) -> void:
 	_current_tower = tower
-	_showing_empty_slot = false
+	_showing_empty_cell = false
 	_clear_panel()
 	var t: Dictionary = tower.data()
 	_add_title(str(t.get("name", tower.tower_id)))

@@ -2,6 +2,16 @@
 
 Tudo que foi feito no projeto, do mais recente para o mais antigo.
 
+## 2026-10-11 — Grade de construção estilo Element TD
+- Os 29 lugares fixos (`BuildSlot`) foram substituídos por uma **grade** (`scripts/world/build_grid.gd`): o jogador constrói em qualquer célula livre em volta da rota. Mapa 1: 248 células construíveis.
+- Células que encostam na estrada, perto da entrada/castelo ou listadas em `blocked_cells` ficam bloqueadas.
+- Cursor verde/vermelho seguindo o mouse; quadrado amarelo na seleção; quadrados claros mostram onde dá para construir.
+- O clique agora usa o plano do chão (sem física).
+- `map_01.json`: campo `slots` removido; novo bloco `build_grid`.
+- Teste automático atualizado (confere a grade e que não dá para construir em célula ocupada).
+- Proposta de tema D&D registrada em docs/ideas/tema-dnd.md.
+- Docs atualizados: systems/map.md reescrito, architecture, data-reference, testing, hud, towers, manual, decisions (D-010).
+
 ## 2026-10-11 — Base jogável (Fase 1)
 - Mapa `map_01` "Vale do Rei" montado a partir de `data/maps/map_01.json`: chão, rota fixa em zigue-zague, estrada, entrada (verde), saída/castelo (vermelho) e 29 slots.
 - Inimigos (`enemy.gd`) seguem a rota com vida, Ordem (cor), armadura, regeneração, barra de vida e efeitos de lentidão/veneno/atordoar.

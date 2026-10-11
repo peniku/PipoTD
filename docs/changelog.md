@@ -7,6 +7,7 @@ Tudo que foi feito no projeto, do mais recente para o mais antigo.
 - **Menu principal** (`scenes/menu.tscn`, agora a cena inicial): Jogar, Idioma (alterna e salva), Sair; fundo com o cenário do jogo, torres decorativas e câmera girando. Botão **Menu** no HUD e na tela de fim de jogo.
 - **Mira das torres**: 5 modos por torre (da frente, de trás, mais HP, menos HP, mais próximo), botões no painel da torre e tecla **T**; mantida ao evoluir. `targeting` em `towers.json` = modo inicial.
 - **Testes**: chaves iguais nos dois idiomas, nomes completos, troca de idioma no HUD, menu abre, os 5 modos de mira escolhem o inimigo certo.
+- `docs/.gdignore`: o Godot ignora a pasta de documentação (as imagens não entram no jogo exportado).
 - **Capturas**: `--lang=` e `--menu` em `tests/screenshot.tscn`; imagens `menu_pt.png`, `menu_en.png`, `targeting_en.png`.
 - Docs: novos `systems/localization.md` e `systems/menu.md`; atualizados towers (tabela PT/EN), systems/towers (mira), hud, data-reference, architecture, manual, testing, CLAUDE.md (regra de textos), decisões D-014/D-015.
 

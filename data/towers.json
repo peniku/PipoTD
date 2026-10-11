@@ -1,0 +1,841 @@
+{
+  "_doc": "Valores PROVISÓRIOS. Editar pelo painel de balanceamento ou à mão. Ver docs/balancing.md.",
+  "version": 1,
+  "towers": [
+    {
+      "splash_radius": 0.0,
+      "ability": null,
+      "requires": {},
+      "upgrades_to": [
+        "sagrado_1",
+        "necromancia_1",
+        "gelo_1",
+        "fogo_1",
+        "druidico_1",
+        "pedra_1"
+      ],
+      "targeting": "first",
+      "id": "arqueiros",
+      "name": "Torre de Arqueiros",
+      "tier": "base",
+      "element": null,
+      "cost": 50,
+      "damage": 20,
+      "attack_speed": 1.2,
+      "range": 9.0,
+      "role": "alvo único barato"
+    },
+    {
+      "splash_radius": 2.5,
+      "ability": null,
+      "requires": {},
+      "upgrades_to": [
+        "sagrado_1",
+        "necromancia_1",
+        "gelo_1",
+        "fogo_1",
+        "druidico_1",
+        "pedra_1"
+      ],
+      "targeting": "first",
+      "id": "catapulta",
+      "name": "Catapulta",
+      "tier": "base",
+      "element": null,
+      "cost": 75,
+      "damage": 30,
+      "attack_speed": 0.6,
+      "range": 8.0,
+      "role": "dano em área barato"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": null,
+      "requires": {
+        "sagrado": 1
+      },
+      "upgrades_to": [
+        "sagrado_2",
+        "sagrado_necromancia",
+        "sagrado_gelo",
+        "sagrado_fogo",
+        "sagrado_druidico",
+        "sagrado_pedra"
+      ],
+      "targeting": "first",
+      "id": "sagrado_1",
+      "name": "Capela",
+      "tier": "single_1",
+      "element": "sagrado",
+      "cost": 150,
+      "damage": 60,
+      "attack_speed": 1.0,
+      "range": 10.0,
+      "role": "dano alto, alvo único"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": null,
+      "requires": {
+        "sagrado": 2
+      },
+      "upgrades_to": [
+        "sagrado_3"
+      ],
+      "targeting": "first",
+      "id": "sagrado_2",
+      "name": "Igreja",
+      "tier": "single_2",
+      "element": "sagrado",
+      "cost": 500,
+      "damage": 240,
+      "attack_speed": 1.0,
+      "range": 10.5,
+      "role": "dano alto, alvo único"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": null,
+      "requires": {
+        "sagrado": 3
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "sagrado_3",
+      "name": "Catedral Radiante",
+      "tier": "single_3",
+      "element": "sagrado",
+      "cost": 1500,
+      "damage": 960,
+      "attack_speed": 1.0,
+      "range": 11.0,
+      "role": "dano alto, alvo único"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": null,
+      "requires": {
+        "necromancia": 1
+      },
+      "upgrades_to": [
+        "necromancia_2",
+        "sagrado_necromancia",
+        "necromancia_gelo",
+        "necromancia_fogo",
+        "necromancia_druidico",
+        "necromancia_pedra"
+      ],
+      "targeting": "first",
+      "id": "necromancia_1",
+      "name": "Altar Sombrio",
+      "tier": "single_1",
+      "element": "necromancia",
+      "cost": 150,
+      "damage": 180,
+      "attack_speed": 0.35,
+      "range": 9.0,
+      "role": "dano enorme, ataque lento"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": null,
+      "requires": {
+        "necromancia": 2
+      },
+      "upgrades_to": [
+        "necromancia_3"
+      ],
+      "targeting": "first",
+      "id": "necromancia_2",
+      "name": "Cripta",
+      "tier": "single_2",
+      "element": "necromancia",
+      "cost": 500,
+      "damage": 720,
+      "attack_speed": 0.35,
+      "range": 9.5,
+      "role": "dano enorme, ataque lento"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": null,
+      "requires": {
+        "necromancia": 3
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "necromancia_3",
+      "name": "Torre do Lich",
+      "tier": "single_3",
+      "element": "necromancia",
+      "cost": 1500,
+      "damage": 2880,
+      "attack_speed": 0.35,
+      "range": 10.0,
+      "role": "dano enorme, ataque lento"
+    },
+    {
+      "splash_radius": 1.5,
+      "ability": {
+        "type": "slow",
+        "amount": 0.3,
+        "duration": 2.0
+      },
+      "requires": {
+        "gelo": 1
+      },
+      "upgrades_to": [
+        "gelo_2",
+        "sagrado_gelo",
+        "necromancia_gelo",
+        "gelo_fogo",
+        "gelo_druidico",
+        "gelo_pedra"
+      ],
+      "targeting": "first",
+      "id": "gelo_1",
+      "name": "Poço Gelado",
+      "tier": "single_1",
+      "element": "gelo",
+      "cost": 150,
+      "damage": 35,
+      "attack_speed": 1.0,
+      "range": 8.5,
+      "role": "desacelera inimigos"
+    },
+    {
+      "splash_radius": 1.5,
+      "ability": {
+        "type": "slow",
+        "amount": 0.3,
+        "duration": 2.0
+      },
+      "requires": {
+        "gelo": 2
+      },
+      "upgrades_to": [
+        "gelo_3"
+      ],
+      "targeting": "first",
+      "id": "gelo_2",
+      "name": "Torre de Gelo",
+      "tier": "single_2",
+      "element": "gelo",
+      "cost": 500,
+      "damage": 140,
+      "attack_speed": 1.0,
+      "range": 9.0,
+      "role": "desacelera inimigos"
+    },
+    {
+      "splash_radius": 1.5,
+      "ability": {
+        "type": "slow",
+        "amount": 0.3,
+        "duration": 2.0
+      },
+      "requires": {
+        "gelo": 3
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "gelo_3",
+      "name": "Bastião Glacial",
+      "tier": "single_3",
+      "element": "gelo",
+      "cost": 1500,
+      "damage": 560,
+      "attack_speed": 1.0,
+      "range": 9.5,
+      "role": "desacelera inimigos"
+    },
+    {
+      "splash_radius": 2.5,
+      "ability": null,
+      "requires": {
+        "fogo": 1
+      },
+      "upgrades_to": [
+        "fogo_2",
+        "sagrado_fogo",
+        "necromancia_fogo",
+        "gelo_fogo",
+        "fogo_druidico",
+        "fogo_pedra"
+      ],
+      "targeting": "first",
+      "id": "fogo_1",
+      "name": "Braseiro",
+      "tier": "single_1",
+      "element": "fogo",
+      "cost": 150,
+      "damage": 40,
+      "attack_speed": 0.8,
+      "range": 8.0,
+      "role": "dano em área"
+    },
+    {
+      "splash_radius": 2.5,
+      "ability": null,
+      "requires": {
+        "fogo": 2
+      },
+      "upgrades_to": [
+        "fogo_3"
+      ],
+      "targeting": "first",
+      "id": "fogo_2",
+      "name": "Torre de Chamas",
+      "tier": "single_2",
+      "element": "fogo",
+      "cost": 500,
+      "damage": 160,
+      "attack_speed": 0.8,
+      "range": 8.5,
+      "role": "dano em área"
+    },
+    {
+      "splash_radius": 2.5,
+      "ability": null,
+      "requires": {
+        "fogo": 3
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "fogo_3",
+      "name": "Fornalha Infernal",
+      "tier": "single_3",
+      "element": "fogo",
+      "cost": 1500,
+      "damage": 640,
+      "attack_speed": 0.8,
+      "range": 9.0,
+      "role": "dano em área"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "poison",
+        "dps_ratio": 0.5,
+        "duration": 4.0
+      },
+      "requires": {
+        "druidico": 1
+      },
+      "upgrades_to": [
+        "druidico_2",
+        "sagrado_druidico",
+        "necromancia_druidico",
+        "gelo_druidico",
+        "fogo_druidico",
+        "druidico_pedra"
+      ],
+      "targeting": "first",
+      "id": "druidico_1",
+      "name": "Círculo de Pedras",
+      "tier": "single_1",
+      "element": "druidico",
+      "cost": 150,
+      "damage": 30,
+      "attack_speed": 1.0,
+      "range": 9.0,
+      "role": "veneno ao longo do tempo"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "poison",
+        "dps_ratio": 0.5,
+        "duration": 4.0
+      },
+      "requires": {
+        "druidico": 2
+      },
+      "upgrades_to": [
+        "druidico_3"
+      ],
+      "targeting": "first",
+      "id": "druidico_2",
+      "name": "Bosque Druídico",
+      "tier": "single_2",
+      "element": "druidico",
+      "cost": 500,
+      "damage": 120,
+      "attack_speed": 1.0,
+      "range": 9.5,
+      "role": "veneno ao longo do tempo"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "poison",
+        "dps_ratio": 0.5,
+        "duration": 4.0
+      },
+      "requires": {
+        "druidico": 3
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "druidico_3",
+      "name": "Árvore Sagrada",
+      "tier": "single_3",
+      "element": "druidico",
+      "cost": 1500,
+      "damage": 480,
+      "attack_speed": 1.0,
+      "range": 10.0,
+      "role": "veneno ao longo do tempo"
+    },
+    {
+      "splash_radius": 1.5,
+      "ability": {
+        "type": "stun",
+        "chance": 0.15,
+        "duration": 0.6
+      },
+      "requires": {
+        "pedra": 1
+      },
+      "upgrades_to": [
+        "pedra_2",
+        "sagrado_pedra",
+        "necromancia_pedra",
+        "gelo_pedra",
+        "fogo_pedra",
+        "druidico_pedra"
+      ],
+      "targeting": "first",
+      "id": "pedra_1",
+      "name": "Trabuco",
+      "tier": "single_1",
+      "element": "pedra",
+      "cost": 150,
+      "damage": 70,
+      "attack_speed": 0.5,
+      "range": 9.5,
+      "role": "atordoa, bom contra armadura"
+    },
+    {
+      "splash_radius": 1.5,
+      "ability": {
+        "type": "stun",
+        "chance": 0.15,
+        "duration": 0.6
+      },
+      "requires": {
+        "pedra": 2
+      },
+      "upgrades_to": [
+        "pedra_3"
+      ],
+      "targeting": "first",
+      "id": "pedra_2",
+      "name": "Baluarte",
+      "tier": "single_2",
+      "element": "pedra",
+      "cost": 500,
+      "damage": 280,
+      "attack_speed": 0.5,
+      "range": 10.0,
+      "role": "atordoa, bom contra armadura"
+    },
+    {
+      "splash_radius": 1.5,
+      "ability": {
+        "type": "stun",
+        "chance": 0.15,
+        "duration": 0.6
+      },
+      "requires": {
+        "pedra": 3
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "pedra_3",
+      "name": "Fortaleza de Pedra",
+      "tier": "single_3",
+      "element": "pedra",
+      "cost": 1500,
+      "damage": 1120,
+      "attack_speed": 0.5,
+      "range": 10.5,
+      "role": "atordoa, bom contra armadura"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "alterna dano sagrado/sombrio; cobre a fraqueza dos dois"
+      },
+      "requires": {
+        "sagrado": 1,
+        "necromancia": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "sagrado_necromancia",
+      "name": "Eclipse",
+      "tier": "dual",
+      "element": [
+        "sagrado",
+        "necromancia"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "alterna dano sagrado/sombrio; cobre a fraqueza dos dois"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "raio que perfura vários inimigos em linha"
+      },
+      "requires": {
+        "sagrado": 1,
+        "gelo": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "sagrado_gelo",
+      "name": "Santuário de Cristal",
+      "tier": "dual",
+      "element": [
+        "sagrado",
+        "gelo"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "raio que perfura vários inimigos em linha"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "dano alto em área pequena"
+      },
+      "requires": {
+        "sagrado": 1,
+        "fogo": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "sagrado_fogo",
+      "name": "Pira do Inquisidor",
+      "tier": "dual",
+      "element": [
+        "sagrado",
+        "fogo"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "dano alto em área pequena"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "aumenta o dano das torres vizinhas (suporte)"
+      },
+      "requires": {
+        "sagrado": 1,
+        "druidico": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "sagrado_druidico",
+      "name": "Bosque Abençoado",
+      "tier": "dual",
+      "element": [
+        "sagrado",
+        "druidico"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "aumenta o dano das torres vizinhas (suporte)"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "golpe pesado que atordoa o alvo"
+      },
+      "requires": {
+        "sagrado": 1,
+        "pedra": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "sagrado_pedra",
+      "name": "Bastião dos Paladinos",
+      "tier": "dual",
+      "element": [
+        "sagrado",
+        "pedra"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "golpe pesado que atordoa o alvo"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "congela e amplifica o dano recebido"
+      },
+      "requires": {
+        "necromancia": 1,
+        "gelo": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "necromancia_gelo",
+      "name": "Cripta Gélida",
+      "tier": "dual",
+      "element": [
+        "necromancia",
+        "gelo"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "congela e amplifica o dano recebido"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "queimadura forte ao longo do tempo"
+      },
+      "requires": {
+        "necromancia": 1,
+        "fogo": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "necromancia_fogo",
+      "name": "Fogo Infernal",
+      "tier": "dual",
+      "element": [
+        "necromancia",
+        "fogo"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "queimadura forte ao longo do tempo"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "praga que espalha entre inimigos próximos"
+      },
+      "requires": {
+        "necromancia": 1,
+        "druidico": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "necromancia_druidico",
+      "name": "Pântano Pestilento",
+      "tier": "dual",
+      "element": [
+        "necromancia",
+        "druidico"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "praga que espalha entre inimigos próximos"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "invoca esqueletos que bloqueiam a rota por instantes"
+      },
+      "requires": {
+        "necromancia": 1,
+        "pedra": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "necromancia_pedra",
+      "name": "Mausoléu",
+      "tier": "dual",
+      "element": [
+        "necromancia",
+        "pedra"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "invoca esqueletos que bloqueiam a rota por instantes"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "nuvem de vapor: área + lentidão"
+      },
+      "requires": {
+        "gelo": 1,
+        "fogo": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "gelo_fogo",
+      "name": "Alquimista",
+      "tier": "dual",
+      "element": [
+        "gelo",
+        "fogo"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "nuvem de vapor: área + lentidão"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "lentidão forte em área"
+      },
+      "requires": {
+        "gelo": 1,
+        "druidico": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "gelo_druidico",
+      "name": "Pântano Congelado",
+      "tier": "dual",
+      "element": [
+        "gelo",
+        "druidico"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "lentidão forte em área"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "avalanche periódica em área grande"
+      },
+      "requires": {
+        "gelo": 1,
+        "pedra": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "gelo_pedra",
+      "name": "Geleira",
+      "tier": "dual",
+      "element": [
+        "gelo",
+        "pedra"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "avalanche periódica em área grande"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "fogo que se espalha pelo caminho"
+      },
+      "requires": {
+        "fogo": 1,
+        "druidico": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "fogo_druidico",
+      "name": "Incêndio Florestal",
+      "tier": "dual",
+      "element": [
+        "fogo",
+        "druidico"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "fogo que se espalha pelo caminho"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "canhão de alto dano em área"
+      },
+      "requires": {
+        "fogo": 1,
+        "pedra": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "fogo_pedra",
+      "name": "Forja Anã",
+      "tier": "dual",
+      "element": [
+        "fogo",
+        "pedra"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "canhão de alto dano em área"
+    },
+    {
+      "splash_radius": 0.0,
+      "ability": {
+        "type": "todo",
+        "note": "raízes prendem inimigos (stun em área)"
+      },
+      "requires": {
+        "druidico": 1,
+        "pedra": 1
+      },
+      "upgrades_to": [],
+      "targeting": "first",
+      "id": "druidico_pedra",
+      "name": "Ent Ancião",
+      "tier": "dual",
+      "element": [
+        "druidico",
+        "pedra"
+      ],
+      "cost": 1000,
+      "damage": 800,
+      "attack_speed": 0.8,
+      "range": 9.5,
+      "role": "raízes prendem inimigos (stun em área)"
+    }
+  ]
+}

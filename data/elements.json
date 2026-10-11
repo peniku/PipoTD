@@ -1,0 +1,33 @@
+{
+  "_doc": "Ciclo: cada Ordem é forte contra a seguinte. Multiplicadores editáveis.",
+  "orders": [
+    "sagrado",
+    "necromancia",
+    "gelo",
+    "fogo",
+    "druidico",
+    "pedra"
+  ],
+  "cycle": [
+    "sagrado",
+    "necromancia",
+    "gelo",
+    "fogo",
+    "druidico",
+    "pedra"
+  ],
+  "multipliers": {
+    "strong": 2.0,
+    "weak": 0.5,
+    "neutral": 1.0,
+    "vs_no_order": 0.8
+  },
+  "display_names": {
+    "sagrado": "Sagrado",
+    "necromancia": "Necromancia",
+    "gelo": "Gelo",
+    "fogo": "Fogo",
+    "druidico": "Druídico",
+    "pedra": "Pedra"
+  }
+}

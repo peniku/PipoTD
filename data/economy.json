@@ -1,23 +1,97 @@
 {
-  "_doc": "Economia e ondas. Valores provisórios.",
+  "_doc": "Economia e ondas. Valores PROVISÓRIOS. Ver docs/balancing.md e docs/systems/waves.md.",
   "start_gold": 150,
   "start_lives": 50,
   "interest_per_wave": 0.05,
-  "interest_cap": null,
+  "interest_cap": 250,
   "favor_every_n_waves": 5,
   "order_max_level": 3,
   "waves": {
     "count": 55,
-    "base_hp": 100,
+    "base_hp": 60,
     "hp_growth_per_wave": 1.12,
     "elemental_hp_multiplier": 1.5,
-    "types": [
+    "first_elemental_wave": 5,
+    "spawn_interval": 0.8,
+    "base_speed": 3.0,
+    "pattern": [
+      "normal",
       "normal",
       "rapida",
+      "normal",
       "massa",
       "blindada",
+      "normal",
       "regeneracao",
+      "rapida",
       "chefe"
-    ]
+    ],
+    "types": {
+      "normal": {
+        "count": 10,
+        "hp_mult": 1.0,
+        "speed_mult": 1.0,
+        "armor": 0.0,
+        "regen": 0.0,
+        "gold_mult": 1.0,
+        "scale": 1.0
+      },
+      "rapida": {
+        "count": 10,
+        "hp_mult": 0.7,
+        "speed_mult": 1.7,
+        "armor": 0.0,
+        "regen": 0.0,
+        "gold_mult": 1.0,
+        "scale": 0.8
+      },
+      "massa": {
+        "count": 20,
+        "hp_mult": 0.45,
+        "speed_mult": 1.0,
+        "armor": 0.0,
+        "regen": 0.0,
+        "gold_mult": 0.5,
+        "scale": 0.7
+      },
+      "blindada": {
+        "count": 8,
+        "hp_mult": 1.1,
+        "speed_mult": 0.8,
+        "armor": 0.35,
+        "regen": 0.0,
+        "gold_mult": 1.3,
+        "scale": 1.15
+      },
+      "regeneracao": {
+        "count": 10,
+        "hp_mult": 0.9,
+        "speed_mult": 1.0,
+        "armor": 0.0,
+        "regen": 0.03,
+        "gold_mult": 1.2,
+        "scale": 1.0
+      },
+      "chefe": {
+        "count": 1,
+        "hp_mult": 12.0,
+        "speed_mult": 0.7,
+        "armor": 0.15,
+        "regen": 0.0,
+        "gold_mult": 10.0,
+        "scale": 2.2
+      }
+    }
+  },
+  "start_favor": 1,
+  "order_level_cost_favor": 1,
+  "sell_refund": 0.75,
+  "kill_gold": {
+    "base": 3,
+    "growth_per_wave": 0.6
+  },
+  "lives_lost": {
+    "default": 1,
+    "chefe": 10
   }
 }

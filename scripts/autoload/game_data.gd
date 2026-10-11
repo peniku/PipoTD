@@ -55,6 +55,36 @@ func damage_multiplier(attacker, defender) -> float:
 	return float(m.get("neutral", 1.0))
 
 
+## Ordem que define o tipo de dano da torre. Duais usam a PRIMEIRA Ordem da lista.
+func tower_damage_order(t: Dictionary):
+	var e = t.get("element", null)
+	if e is Array:
+		return e[0] if e.size() > 0 else null
+	return e
+
+
+## Cor de uma Ordem (null = sem Ordem), lida de elements.json.
+func order_color(order) -> Color:
+	var colors: Dictionary = elements.get("colors", {})
+	var key: String = "none" if order == null else str(order)
+	return Color.html(str(colors.get(key, "#ffffff")))
+
+
+func order_display_name(order) -> String:
+	if order == null:
+		return "Sem Ordem"
+	var names: Dictionary = elements.get("display_names", {})
+	return str(names.get(order, order))
+
+
+func ignores_armor(order) -> bool:
+	return order != null and order in elements.get("armor_piercing_orders", [])
+
+
+func load_map(map_id: String) -> Dictionary:
+	return _load_json("res://data/maps/%s.json" % map_id)
+
+
 func _load_json(path: String) -> Dictionary:
 	var f := FileAccess.open(path, FileAccess.READ)
 	if f == null:

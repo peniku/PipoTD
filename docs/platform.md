@@ -4,7 +4,7 @@
 
 Escolhido por: 3D com espaço para escalar a parte gráfica, gratuito/open source, exporta para PC (Steam), web e mobile, e tem multiplayer de alto nível embutido (`MultiplayerAPI` + ENet/WebSocket).
 
-Linguagem: **GDScript** (troca para C# só se aparecer gargalo de performance).
+Versão: **Godot 4.5** (testado com 4.5.1). Linguagem: **GDScript** (troca para C# só se aparecer gargalo de performance).
 
 ## Princípios de arquitetura
 
@@ -14,18 +14,7 @@ Linguagem: **GDScript** (troca para C# só se aparecer gargalo de performance).
 
 ## Estrutura de pastas
 
-```
-data/               # números do jogo (balanceamento)
-  towers.json
-  elements.json
-  economy.json
-scripts/
-  autoload/game_data.gd   # carrega os JSON (singleton GameData)
-scenes/             # cenas .tscn (mapa, torres, inimigos, UI)
-assets/models/      # modelos 3D
-addons/             # plugin do painel de balanceamento (futuro)
-docs/               # esta documentação
-```
+Ver [architecture.md](architecture.md).
 
 ## Multiplayer (fases)
 

@@ -1,0 +1,28 @@
+# Sistema: Torres
+
+**Código:** `scripts/entities/tower.gd` (classe `Tower`), `scripts/entities/projectile.gd`, ações em `scripts/world/main.gd`
+**Dados:** `data/towers.json` · lista e árvore de design em [../towers.md](../towers.md)
+
+## Ciclo de vida
+1. **Construir** (`main._on_build`): só torres com `tier: "base"`. Cobra `cost`, cria `Tower` filha do slot.
+2. **Atirar** (`_process`): quando o tempo de recarga zera, procura alvo; se achar, cria um projétil e recarrega por `1 / attack_speed` segundos.
+3. **Evoluir** (`main._on_upgrade`): o painel lista `upgrades_to`. Exige `requires` (níveis de Ordem) e cobra o `cost` cheio da torre nova (decisão D-008). A torre troca de `tower_id` no lugar.
+4. **Vender** (`main._on_sell`): devolve `total_spent × sell_refund` (75%).
+
+## Mira
+Alvo = inimigo vivo, dentro do `range` (distância no plano X/Z), com **maior `progress`** (o mais perto do castelo). Prioridades configuráveis estão no to-do (Fase 3).
+
+## Projétil
+- Velocidade fixa de 28 m/s; persegue o alvo.
+- Se o alvo morrer no caminho, vai até a última posição e explode lá.
+- `splash_radius > 0`: acerta todos os inimigos nesse raio do ponto de impacto. Senão, só o alvo.
+- Dano, Ordem e habilidade são copiados da torre no momento do disparo.
+
+## Números sempre do JSON
+`data()` devolve o dicionário da torre em `GameData` a cada uso. Depois de editar `towers.json`, aperte **F5** no jogo: torres já construídas passam a usar os valores novos e o visual é refeito.
+
+## Visual provisório
+Cilindro de pedra (mais alto conforme a camada: base 1,6 m → Dual 3,4 m) + "telhado" cônico na cor da Ordem (Duais têm dois). Catapulta tem um braço inclinado. Anel translúcido mostra o alcance quando selecionada.
+
+## Campos usados
+`id`, `name`, `tier`, `element`, `cost`, `damage`, `attack_speed`, `range`, `splash_radius`, `ability`, `requires`, `upgrades_to`, `role`. Detalhes em [../data-reference.md](../data-reference.md).

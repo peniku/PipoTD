@@ -8,9 +8,14 @@
 | `data/elements.json` | ciclo das Ordens e multiplicadores forte/fraco |
 | `data/economy.json` | ouro inicial, juros, Favor Real, curva de vida das ondas |
 
-Todos os valores atuais são **provisórios**.
+Todos os valores atuais são **provisórios**. Explicação de cada campo: [data-reference.md](data-reference.md).
 
-## Painel de balanceamento (planejado)
+## Como balancear hoje
+1. Rode o jogo.
+2. Edite o JSON em `data/` e salve.
+3. Aperte **F5** na janela do jogo: torres já construídas, preços e ondas futuras passam a usar os valores novos.
+
+## Painel de balanceamento (planejado — Fase 2 do [todo.md](todo.md))
 
 Duas camadas:
 

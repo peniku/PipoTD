@@ -1,5 +1,5 @@
 {
-  "_doc": "Ciclo: cada Ordem é forte contra a seguinte. Multiplicadores editáveis.",
+  "_doc": "Ciclo: cada Ordem é forte contra a seguinte. Multiplicadores, cores e quem ignora armadura. Ver docs/systems/combat.md.",
   "orders": [
     "sagrado",
     "necromancia",
@@ -29,5 +29,17 @@
     "fogo": "Fogo",
     "druidico": "Druídico",
     "pedra": "Pedra"
-  }
+  },
+  "colors": {
+    "none": "#b8b8b8",
+    "sagrado": "#ffe27a",
+    "necromancia": "#7b3fa0",
+    "gelo": "#7fd3ff",
+    "fogo": "#ff6a2b",
+    "druidico": "#4caf50",
+    "pedra": "#8d7b68"
+  },
+  "armor_piercing_orders": [
+    "pedra"
+  ]
 }

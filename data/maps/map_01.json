@@ -38,5 +38,17 @@
     "road_clearance": 0.0,
     "end_clearance": 3.0,
     "blocked_cells": []
+  },
+  "scenery": {
+    "seed": 7,
+    "terrain_size": [
+      150,
+      120
+    ],
+    "forest_depth": 26,
+    "trees": 420,
+    "rocks": 160,
+    "grass_tufts": 2200,
+    "mountains": 14
   }
 }

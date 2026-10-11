@@ -18,6 +18,9 @@ O dono do projeto quer o projeto **perfeitamente documentado em Markdown**, para
 - **docs/manual/** — se mudar algo que o jogador vê (controles, regras), atualize o manual.
 - Pode criar quantos .md forem necessários; mantenha o índice em docs/README.md.
 
+## Regra: sempre atualizar o GitHub
+Toda alteração feita no projeto termina com **commit + push** para https://github.com/peniku/PipoTD (branch `main`), com a documentação já atualizada no mesmo commit. Nunca deixar trabalho só local.
+
 ## Regras de código
 - **Nenhum número de balanceamento fixo no código.** Dano, velocidade, alcance, custos, vidas, ondas: sempre em `data/*.json`, lidos via `GameData`.
 - Lógica do jogo separada do visual (facilita multiplayer no futuro).
@@ -31,3 +34,7 @@ godot --headless --fixed-fps 60 res://tests/smoke_test.tscn
 ```
 
 Tem que terminar com `RESULTADO: PASSOU`.
+
+No PC do dono, o Godot fica em `E:\Projetos\Godot\Godot_v4.5.1-stable_win64_console.exe` (use o `_console` para ver a saída no terminal).
+
+Mudou algo visual? Gere capturas de tela e confira antes de commitar (ver docs/testing.md → "Capturas de tela").

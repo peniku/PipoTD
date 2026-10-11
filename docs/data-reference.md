@@ -37,9 +37,10 @@ Todos os números do jogo ficam em `data/`. Depois de editar, aperte **F5** com 
 | `multipliers.weak` | dano contra a Ordem que vence você |
 | `multipliers.neutral` | demais combinações |
 | `multipliers.vs_no_order` | dano de torre com Ordem em inimigo sem Ordem |
-| `display_names` | nomes com acento para a tela |
+| `display_names` | nomes de tela (`sagrado` → "Divino", `pedra` → "Terra") |
 | `colors` | cor de cada Ordem (`none` = sem Ordem), em hexadecimal |
 | `armor_piercing_orders` | Ordens que ignoram armadura |
+| `factions.<ordem>` | facção inimiga de cada Ordem (`none` = sem Ordem): `name` (nome da facção), `boss` (nome do chefe), `model` (modelo 3D: `goblin`, `knight`, `skeleton`, `giant`, `demon`, `beast`, `golem`) |
 
 ---
 
@@ -72,3 +73,15 @@ Todos os números do jogo ficam em `data/`. Depois de editar, aperte **F5** com 
 
 ## `data/maps/<id>.json`
 Ver [systems/map.md](systems/map.md): `id`, `name`, `ground_size`, `path`, `path_width`, `build_grid` (`cell_size`, `road_clearance`, `end_clearance`, `blocked_cells`).
+
+Bloco `scenery` (só visual, ver [art-direction.md](art-direction.md#cenário)):
+
+| Campo | Significado |
+|---|---|
+| `seed` | semente aleatória (mesma semente = mesmo cenário) |
+| `terrain_size` | tamanho do terreno visível em metros (maior que a área jogável) |
+| `forest_depth` | até quantos metros além da área jogável vai a floresta |
+| `trees` | quantidade de pinheiros |
+| `rocks` | quantidade de rochas |
+| `grass_tufts` | tufos de grama |
+| `mountains` | montanhas ao fundo |

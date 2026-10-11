@@ -1,14 +1,16 @@
 extends Node3D
 ## Cena principal da partida. Monta o mundo a partir de data/maps/<map>.json
-## (chão, rota, grade de construção, câmera, luz), cria o WaveManager e o HUD, e trata a
-## entrada do jogador (cliques, teclas, câmera). Ver docs/architecture.md.
+## (rota e grade de construção) e o visual (WorldBuilder: céu, terreno, castelo,
+## portal, floresta), cria o WaveManager e o HUD, e trata a entrada do jogador
+## (cliques, teclas, câmera). Ver docs/architecture.md.
 
 @export var map_id: String = "map_01"
 
 const CAM_PAN_SPEED := 18.0
 const CAM_ZOOM_STEP := 2.0
-const CAM_MIN_HEIGHT := 12.0
+const CAM_MIN_HEIGHT := 10.0
 const CAM_MAX_HEIGHT := 45.0
+const CAM_ROT_SPEED := 1.6     # radianos por segundo (Q/E)
 
 var map_data: Dictionary
 var path: Path3D
@@ -16,7 +18,8 @@ var waves: WaveManager
 var hud: HUD
 var camera: Camera3D
 var _cam_target: Vector3 = Vector3.ZERO
-var _cam_height: float = 28.0
+var _cam_height: float = 26.0
+var _cam_yaw: float = 0.0
 var grid: BuildGrid
 var _selected_cell: Vector2i = Vector2i(-1, -1)
 var _has_selection: bool = false
@@ -25,9 +28,8 @@ var _has_selection: bool = false
 func _ready() -> void:
 	map_data = GameData.load_map(map_id)
 	GameState.reset()
-	_build_environment()
-	_build_ground()
 	_build_path()
+	WorldBuilder.new().build(self, map_data)
 	_build_grid()
 	_build_camera()
 
@@ -35,7 +37,7 @@ func _ready() -> void:
 	waves.name = "WaveManager"
 	add_child(waves)
 	waves.setup(path)
-	waves.wave_started.connect(func(_n, _i): _refresh_wave_button())
+	waves.wave_started.connect(_on_wave_started)
 	waves.wave_cleared.connect(func(_n): _refresh_wave_button())
 	waves.all_waves_cleared.connect(func(): hud.show_message("Vitória! Todas as ondas defendidas.", true))
 
@@ -55,78 +57,16 @@ func _ready() -> void:
 
 # --- Montagem do mundo ------------------------------------------------------
 
-func _build_environment() -> void:
-	var sun := DirectionalLight3D.new()
-	sun.rotation_degrees = Vector3(-55, -35, 0)
-	sun.shadow_enabled = true
-	add_child(sun)
-
-	var env := WorldEnvironment.new()
-	var e := Environment.new()
-	e.background_mode = Environment.BG_COLOR
-	e.background_color = Color(0.53, 0.68, 0.82)
-	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	e.ambient_light_color = Color(0.75, 0.75, 0.8)
-	e.ambient_light_energy = 0.6
-	env.environment = e
-	add_child(env)
-
-
-func _build_ground() -> void:
-	var size: Array = map_data.get("ground_size", [44, 32])
-	var ground := MeshInstance3D.new()
-	var plane := PlaneMesh.new()
-	plane.size = Vector2(float(size[0]), float(size[1]))
-	ground.mesh = plane
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.36, 0.55, 0.28)
-	ground.material_override = mat
-	ground.name = "Ground"
-	add_child(ground)
-
-
+## Rota lógica (Path3D) por onde os inimigos andam. O visual da estrada é
+## feito pelo WorldBuilder.
 func _build_path() -> void:
 	path = Path3D.new()
 	path.name = "Route"
 	var curve := Curve3D.new()
-	var pts: Array = map_data.get("path", [])
-	for p in pts:
+	for p in map_data.get("path", []):
 		curve.add_point(Vector3(float(p[0]), 0.0, float(p[1])))
 	path.curve = curve
 	add_child(path)
-
-	# Estrada visual: uma caixa achatada por segmento
-	var width: float = float(map_data.get("path_width", 2.4))
-	var road_mat := StandardMaterial3D.new()
-	road_mat.albedo_color = Color(0.62, 0.5, 0.35)
-	for i in range(pts.size() - 1):
-		var a := Vector3(float(pts[i][0]), 0.02, float(pts[i][1]))
-		var b := Vector3(float(pts[i + 1][0]), 0.02, float(pts[i + 1][1]))
-		var seg := MeshInstance3D.new()
-		var box := BoxMesh.new()
-		box.size = Vector3(width, 0.04, a.distance_to(b) + width)
-		seg.mesh = box
-		seg.material_override = road_mat
-		add_child(seg)
-		seg.position = (a + b) / 2.0
-		seg.look_at(b, Vector3.UP)
-
-	# Marcadores de entrada (verde) e saída/castelo (vermelho)
-	if pts.size() >= 2:
-		_add_marker(Vector3(float(pts[0][0]), 0, float(pts[0][1])), Color(0.2, 0.8, 0.2))
-		_add_marker(Vector3(float(pts[-1][0]), 0, float(pts[-1][1])), Color(0.85, 0.2, 0.2))
-
-
-func _add_marker(pos: Vector3, color: Color) -> void:
-	var m := MeshInstance3D.new()
-	var box := BoxMesh.new()
-	box.size = Vector3(2.0, 2.5, 2.0)
-	m.mesh = box
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = color
-	m.material_override = mat
-	m.position = pos + Vector3.UP * 1.25
-	add_child(m)
 
 
 func _build_grid() -> void:
@@ -138,13 +78,15 @@ func _build_grid() -> void:
 
 func _build_camera() -> void:
 	camera = Camera3D.new()
-	camera.fov = 50
+	camera.fov = 45
+	camera.far = 400.0
 	add_child(camera)
 	_update_camera()
 
 
 func _update_camera() -> void:
-	camera.position = _cam_target + Vector3(0, _cam_height, _cam_height * 0.75)
+	var back := Vector3(sin(_cam_yaw), 0, cos(_cam_yaw)) * _cam_height * 0.95
+	camera.position = _cam_target + Vector3(0, _cam_height, 0) + back
 	camera.look_at(_cam_target, Vector3.UP)
 
 
@@ -156,8 +98,15 @@ func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_DOWN): move.z += 1
 	if Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_LEFT): move.x -= 1
 	if Input.is_key_pressed(KEY_D) or Input.is_key_pressed(KEY_RIGHT): move.x += 1
+	var rot := 0.0
+	if Input.is_key_pressed(KEY_Q): rot += 1
+	if Input.is_key_pressed(KEY_E): rot -= 1
+	if rot != 0.0:
+		_cam_yaw += rot * CAM_ROT_SPEED * delta
+		_update_camera()
 	if move != Vector3.ZERO:
-		_cam_target += move.normalized() * CAM_PAN_SPEED * delta
+		# mover relativo à direção da câmera
+		_cam_target += move.normalized().rotated(Vector3.UP, _cam_yaw) * CAM_PAN_SPEED * delta
 		_update_camera()
 	# Cursor da grade segue o mouse
 	var mouse_cell = _pick_cell(get_viewport().get_mouse_position())
@@ -209,6 +158,7 @@ func _select_cell(cell) -> void:
 			old.set_selected(false)
 	_has_selection = false
 	grid.show_selected(Vector2i.ZERO, false)
+	grid.show_overlay(false)
 	if cell == null:
 		hud.clear_selection()
 		return
@@ -224,6 +174,7 @@ func _select_cell(cell) -> void:
 		tower.set_selected(true)
 		hud.show_tower(tower)
 	else:
+		grid.show_overlay(true)
 		hud.show_empty_cell()
 
 
@@ -232,6 +183,11 @@ func _select_cell(cell) -> void:
 func _on_start_wave() -> void:
 	waves.start_next_wave()
 	_refresh_wave_button()
+
+
+func _on_wave_started(_n: int, info: Dictionary) -> void:
+	_refresh_wave_button()
+	hud.announce_wave(info)
 
 
 func _refresh_wave_button() -> void:

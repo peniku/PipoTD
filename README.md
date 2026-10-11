@@ -1,6 +1,8 @@
 # PipoTd
 
-Tower defense 3D com temática medieval, inspirado no Element TD 2. Feito em **Godot 4.5**.
+Tower defense 3D de fantasia medieval sombria inspirada em D&D, no estilo do Element TD 2. Feito em **Godot 4.5**.
+
+![PipoTd](docs/images/overview.png)
 
 - **Comece por aqui:** [docs/README.md](docs/README.md) (índice) e [docs/todo.md](docs/todo.md) (tarefas)
 - Design do jogo: [docs/design.md](docs/design.md)
@@ -17,3 +19,6 @@ Os números do jogo (dano, velocidade, range, custos) ficam em `data/*.json`.
 
 ## Jogar
 Controles e regras: [docs/manual/jogador.md](docs/manual/jogador.md).
+
+## Créditos
+Ver [CREDITS.md](CREDITS.md).

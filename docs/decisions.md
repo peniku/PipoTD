@@ -2,6 +2,15 @@
 
 Cada decisão importante, com data e motivo. Nova decisão = nova entrada no topo.
 
+## D-013 · 2026-10-11 · Sempre publicar no GitHub
+Todo trabalho termina com commit + push em peniku/PipoTD, docs incluídas. Pedido do dono, para que o projeto esteja sempre atualizado em qualquer máquina/sessão.
+
+## D-012 · 2026-10-11 · Visual 100% procedural por enquanto
+Modelos e texturas são gerados por código (formas primitivas + ruído), sem arquivos de arte. Motivo: iterar rápido e manter tudo em texto revisável. Modelos 3D de verdade (Blender/assets) entram na Fase 5 substituindo `tower_model.gd` / `enemy_model.gd` sem mexer na lógica. Lógica e visual ficam em scripts separados (`scripts/visual/`).
+
+## D-011 · 2026-10-11 · Tema D&D (SRD 5.1), sombrio e adulto
+Aprovado pelo dono. Usa só vocabulário do SRD/genérico (goblins, lich, gigantes do gelo, demônios, urso-coruja, golem, clérigo, paladino), nunca marcas da Wizards (nome D&D, Forgotten Realms, beholder, devorador de mentes). Crédito CC-BY-4.0 em CREDITS.md. Ids internos das Ordens não mudaram (`sagrado`, `pedra`) para não quebrar dados; só os nomes de tela (Divino, Terra).
+
 ## D-010 · 2026-10-11 · Grade de construção em vez de lugares fixos
 Como no Element TD, o chão em volta da rota é uma grade de células de 2 m e o jogador constrói em qualquer célula livre. Dá muito mais liberdade de posicionamento (248 células no mapa 1, antes 29). A grade é calculada a partir da rota, então mapas novos não precisam listar lugares à mão.
 

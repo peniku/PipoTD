@@ -24,7 +24,8 @@ var _poison_time: float = 0.0
 var _poison_order = null
 
 var _alive: bool = true
-var _body: MeshInstance3D
+var _model: EnemyModel
+var _hp_root: Node3D
 var _hp_bar: MeshInstance3D
 var _bar_width: float = 1.2
 
@@ -51,41 +52,52 @@ func _ready() -> void:
 
 
 func _build_visual() -> void:
-	_body = MeshInstance3D.new()
-	var capsule := CapsuleMesh.new()
-	capsule.radius = 0.4
-	capsule.height = 1.2
-	_body.mesh = capsule
-	_body.position.y = 0.6
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = GameData.order_color(order)
-	if armor > 0.0:
-		mat.metallic = 0.8
-		mat.roughness = 0.3
-	_body.material_override = mat
-	add_child(_body)
+	var faction: Dictionary = GameData.faction(order)
+	var model := EnemyModel.new()
+	model.build(str(faction.get("model", "goblin")), order, wave_type == "chefe", armor > 0.0)
+	add_child(model)
+	_model = model
 
-	# Barra de vida (quad sempre virado para a câmera)
+	# Barra de vida: fundo escuro + preenchimento, sempre virada para a câmera.
+	# Só aparece depois do primeiro dano.
+	_hp_root = Node3D.new()
+	_hp_root.position.y = model.height + 0.35
+	_hp_root.visible = false
+	add_child(_hp_root)
+	var back := MeshInstance3D.new()
+	var bq := QuadMesh.new()
+	bq.size = Vector2(_bar_width + 0.08, 0.17)
+	back.mesh = bq
+	back.material_override = _bar_mat(Color(0.05, 0.03, 0.02, 0.85), 0)
+	_hp_root.add_child(back)
 	_hp_bar = MeshInstance3D.new()
 	var quad := QuadMesh.new()
-	quad.size = Vector2(_bar_width, 0.15)
+	quad.size = Vector2(_bar_width, 0.1)
 	_hp_bar.mesh = quad
-	_hp_bar.position.y = 1.6
-	var bar_mat := StandardMaterial3D.new()
-	bar_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	bar_mat.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
-	bar_mat.no_depth_test = true
-	bar_mat.albedo_color = Color(0.2, 0.9, 0.2)
-	_hp_bar.material_override = bar_mat
-	add_child(_hp_bar)
+	_hp_bar.material_override = _bar_mat(Color(0.2, 0.9, 0.2), 1)
+	_hp_root.add_child(_hp_bar)
+
+
+func _bar_mat(c: Color, priority: int) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	m.no_depth_test = true
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.render_priority = priority
+	m.albedo_color = c
+	return m
 
 
 func _process(delta: float) -> void:
 	if not _alive:
 		return
 	_tick_status(delta)
-	if _stun_time <= 0.0:
+	var moving: bool = _stun_time <= 0.0
+	if moving:
 		progress += speed * (1.0 - _slow_amount) * delta
+	if _model:
+		_model.animate(delta, 1.0 - _slow_amount, moving)
 	if progress_ratio >= 0.999:
 		_alive = false
 		reached_end.emit(self)
@@ -127,8 +139,17 @@ func _apply_damage(amount: float, attacker_order, ignore_armor: bool) -> void:
 	_update_bar()
 	if hp <= 0.0:
 		_alive = false
+		_death_fx()
 		died.emit(self, gold_reward)
 		queue_free()
+
+
+## Explosão na cor da facção + "+ouro" flutuando (só visual).
+func _death_fx() -> void:
+	var parent := get_parent()
+	var pos := global_position + Vector3.UP * (_model.height * 0.5 if _model else 0.8)
+	VFX.impact(parent, pos, GameData.order_color(order), 0.0, 22 if wave_type == "chefe" else 12)
+	VFX.float_text(parent, pos + Vector3.UP * 0.6, "+%d" % gold_reward, Color(1.0, 0.82, 0.3))
 
 
 func _apply_ability(ability: Dictionary, damage: float, attacker_order) -> void:
@@ -151,9 +172,10 @@ func _update_bar() -> void:
 	if _hp_bar == null:
 		return
 	var ratio: float = clampf(hp / max_hp, 0.0, 1.0)
+	_hp_root.visible = ratio < 0.999
 	_hp_bar.scale.x = maxf(ratio, 0.01)
 	var mat := _hp_bar.material_override as StandardMaterial3D
-	mat.albedo_color = Color(1.0 - ratio, ratio, 0.15)
+	mat.albedo_color = Color(0.85, 0.15, 0.1).lerp(Color(0.35, 0.85, 0.25), ratio)
 
 
 func is_alive() -> bool:

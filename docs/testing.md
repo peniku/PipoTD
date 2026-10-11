@@ -31,3 +31,18 @@ Resultado esperado: linhas `OK` e no fim `RESULTADO: PASSOU` (código de saída 
 
 ## Teste manual
 Abra no editor e aperte F5 do Godot (rodar). Roteiro rápido no [manual do jogador](manual/jogador.md).
+
+## Capturas de tela
+**Arquivos:** `tests/screenshot.tscn` + `tests/screenshot.gd`
+
+Abre o jogo **com janela** (não funciona com `--headless`), monta uma defesa com vários tipos de torre, pula para uma onda e salva 4 imagens: `overview`, `closeup`, `castle`, `portal`.
+
+```
+"E:\Projetos\Godot\Godot_v4.5.1-stable_win64_console.exe" --path . res://tests/screenshot.tscn -- --out=E:/Projetos/PipoTD/docs/images --wave=8
+```
+
+- `--out=` pasta de saída (padrão: `user://screenshots`).
+- `--wave=` qual onda (facção) mostrar.
+- `--gallery` em vez da defesa: uma criatura de cada facção parada na estrada, mais um chefe e um blindado → `gallery.png`.
+
+As imagens em `docs/images/` são usadas em [art-direction.md](art-direction.md).

@@ -9,7 +9,8 @@
 3. **Vida:** `base_hp × hp_growth_per_wave^(n−1) × hp_mult_do_tipo`, × `elemental_hp_multiplier` se tiver Ordem.
 4. **Velocidade:** `base_speed × speed_mult_do_tipo`.
 5. **Quantidade, armadura, regeneração, tamanho:** do tipo.
-6. **Ouro por abate:** `(kill_gold.base + kill_gold.growth_per_wave × (n−1)) × gold_mult_do_tipo`, mínimo 1.
+6. **Facção:** `faction` e `boss_name` vêm de `elements.json → factions` pela Ordem da onda (usados no HUD e no anúncio).
+7. **Ouro por abate:** `(kill_gold.base + kill_gold.growth_per_wave × (n−1)) × gold_mult_do_tipo`, mínimo 1.
 
 `describe_wave` é estática e pura: o futuro painel de balanceamento pode usá-la para desenhar a curva de dificuldade.
 

@@ -43,9 +43,10 @@ Legenda: `[x]` feito · `[ ]` a fazer · `[~]` em andamento
 - [ ] Plugin no editor Godot com tabela de todas as torres
 - [ ] Simulador: rodar N ondas sem tela com uma build e mostrar até onde chega
 
-## Tema e universo
-- [ ] Decidir se o tema segue inspiração D&D (conteúdo SRD) — proposta em [ideas/tema-dnd.md](ideas/tema-dnd.md)
-- [ ] Se sim: renomear Ordens, torres e facções inimigas com vocabulário D&D/SRD
+## Tema e universo ✅
+- [x] Decidir tema: D&D (SRD 5.1), sombrio — [ideas/tema-dnd.md](ideas/tema-dnd.md), decisão D-011
+- [x] Renomear Ordens (Divino, Terra…), torres e criar 7 facções inimigas com chefes ([art-direction.md](art-direction.md))
+- [ ] Textos de lore curtos para cada facção e torre (tooltip / manual)
 
 ## Fase 3 — Conteúdo das torres
 - [ ] Implementar habilidades únicas das 15 Duais (hoje todas são `"todo"`) — ver [towers.md](towers.md)
@@ -62,10 +63,20 @@ Legenda: `[x]` feito · `[ ]` a fazer · `[~]` em andamento
 - [ ] Mostrar a próxima onda com mais detalhe (Ordem, tipo, vida)
 
 ## Fase 5 — Visual 3D
-- [ ] Decidir estilo visual (low poly estilizado × realista)
-- [ ] Modelos das torres por camada e Ordem
-- [ ] Mapa decorado (castelo, árvores, rochas) — usar `blocked_cells` onde houver decoração
-- [ ] Efeitos de projétil, impacto e morte
+- [x] Estilo visual: fantasia medieval sombria, crepúsculo, magia brilhante ([art-direction.md](art-direction.md))
+- [x] Céu, luz, sombras, névoa, glow, SSAO
+- [x] Terreno texturizado, estrada de pedra, floresta, rochas, grama, montanhas, partículas no ar
+- [x] Portal de entrada (shader) e castelo de saída
+- [x] Modelos procedurais das torres por camada e Ordem (cristais, animação de disparo)
+- [x] Modelos procedurais dos inimigos por facção + chefes + armadura
+- [x] Efeitos de projétil (flecha, pedra em arco, magia), impacto, área, morte, "+ouro"
+- [x] Interface com tema medieval e anúncio de onda
+- [x] Capturas de tela automáticas para revisar o visual ([testing.md](testing.md))
+- [ ] Modelos 3D de verdade (Blender ou pacote de assets CC0) para torres e inimigos
+- [ ] Texturas reais (PBR) para pedra, madeira e terreno
+- [ ] Fonte Cinzel embutida no projeto (hoje usa a do sistema)
+- [ ] Decoração dentro da área jogável usando `blocked_cells`
+- [ ] Opção de qualidade gráfica (desligar SSAO/sombras/partículas em PCs fracos)
 - [ ] Sons e música
 
 ## Fase 6 — Multiplayer "quem dura mais"
@@ -84,5 +95,6 @@ Legenda: `[x]` feito · `[ ]` a fazer · `[~]` em andamento
 - [ ] Exportar para Windows; avaliar Steam
 
 ## Fora do jogo
-- [ ] Ligar esta conversa ao PC (app desktop) para trabalhar em `E:\projetos\PipoTd`
-- [ ] Clonar o repositório em `E:\projetos` ([setup.md](setup.md))
+- [x] Trabalhar direto no PC em `E:\Projetos\PipoTD`
+- [x] Clonar o repositório em `E:\Projetos` ([setup.md](setup.md))
+- [x] Instalar Godot 4.5.1 em `E:\Projetos\Godot`

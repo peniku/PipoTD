@@ -16,6 +16,11 @@ Mapa de toda a documentação. Comece por aqui.
 | [design.md](design.md) | Conceito, referência do Element TD 2, as 6 Ordens, roda de fraquezas, recursos |
 | [towers.md](towers.md) | Árvore de evolução e lista das 35 torres da v1 |
 
+## Arte
+| Documento | O que tem |
+|---|---|
+| [art-direction.md](art-direction.md) | Direção de arte: tema D&D sombrio, paleta das Ordens, cenário, torres, facções inimigas, efeitos, interface (com imagens) |
+
 ## Técnico
 | Documento | O que tem |
 |---|---|
@@ -40,7 +45,7 @@ Mapa de toda a documentação. Comece por aqui.
 ## Ideias em discussão
 | Documento | O que tem |
 |---|---|
-| [ideas/tema-dnd.md](ideas/tema-dnd.md) | Proposta de universo inspirado em D&D (SRD) |
+| [ideas/tema-dnd.md](ideas/tema-dnd.md) | Proposta do universo D&D (SRD) — ✅ aprovada |
 
 ## Manual
 | Documento | Para quem |

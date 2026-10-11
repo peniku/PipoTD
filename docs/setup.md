@@ -1,7 +1,9 @@
 # Setup: instalar e rodar
 
 ## 1. Godot
-Baixe o **Godot 4.5.x (versão padrão, não a .NET)** em https://godotengine.org/download e descompacte numa pasta, por exemplo `C:\Godot`. Não precisa instalar.
+Baixe o **Godot 4.5.x (versão padrão, não a .NET)** em https://godotengine.org/download e descompacte numa pasta. Não precisa instalar.
+
+No PC do dono já está em **`E:\Projetos\Godot\`** (4.5.1): `Godot_v4.5.1-stable_win64.exe` (editor) e `..._console.exe` (mesmo programa, mostrando mensagens no terminal).
 
 ## 2. Baixar o projeto
 Com o Git instalado, no terminal:

@@ -1,5 +1,5 @@
 {
-  "_doc": "Ciclo: cada Ordem é forte contra a seguinte. Multiplicadores, cores e quem ignora armadura. Ver docs/systems/combat.md.",
+  "_doc": "Ordens (ids internos), roda de fraquezas, nomes de tela, cores, facções inimigas por Ordem. Ver docs/systems/combat.md e docs/art-direction.md.",
   "orders": [
     "sagrado",
     "necromancia",
@@ -23,23 +23,60 @@
     "vs_no_order": 0.8
   },
   "display_names": {
-    "sagrado": "Sagrado",
+    "sagrado": "Divino",
     "necromancia": "Necromancia",
     "gelo": "Gelo",
     "fogo": "Fogo",
     "druidico": "Druídico",
-    "pedra": "Pedra"
+    "pedra": "Terra"
   },
   "colors": {
-    "none": "#b8b8b8",
-    "sagrado": "#ffe27a",
-    "necromancia": "#7b3fa0",
-    "gelo": "#7fd3ff",
-    "fogo": "#ff6a2b",
-    "druidico": "#4caf50",
-    "pedra": "#8d7b68"
+    "none": "#9a9184",
+    "sagrado": "#ffd77a",
+    "necromancia": "#9b5cff",
+    "gelo": "#7fd8ff",
+    "fogo": "#ff6a1f",
+    "druidico": "#5fd16a",
+    "pedra": "#d08a3a"
   },
   "armor_piercing_orders": [
     "pedra"
-  ]
+  ],
+  "factions": {
+    "none": {
+      "name": "Horda Goblinoide",
+      "boss": "Senhor da Guerra Hobgoblin",
+      "model": "goblin"
+    },
+    "sagrado": {
+      "name": "Cruzados Caídos",
+      "boss": "Paladino Caído",
+      "model": "knight"
+    },
+    "necromancia": {
+      "name": "Legião Morta-Viva",
+      "boss": "Lich",
+      "model": "skeleton"
+    },
+    "gelo": {
+      "name": "Gigantes do Gelo",
+      "boss": "Jarl dos Gigantes do Gelo",
+      "model": "giant"
+    },
+    "fogo": {
+      "name": "Hordas Infernais",
+      "boss": "Senhor Demônio",
+      "model": "demon"
+    },
+    "druidico": {
+      "name": "Bestas Selvagens",
+      "boss": "Urso-Coruja Alfa",
+      "model": "beast"
+    },
+    "pedra": {
+      "name": "Constructos de Pedra",
+      "boss": "Golem Ancião",
+      "model": "golem"
+    }
+  }
 }

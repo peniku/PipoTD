@@ -77,6 +77,12 @@ func order_display_name(order) -> String:
 	return str(names.get(order, order))
 
 
+## Facção inimiga de uma Ordem (null = sem Ordem): {name, boss, model}.
+func faction(order) -> Dictionary:
+	var f: Dictionary = elements.get("factions", {})
+	return f.get("none" if order == null else str(order), {"name": "Inimigos", "boss": "Chefe", "model": "goblin"})
+
+
 func ignores_armor(order) -> bool:
 	return order != null and order in elements.get("armor_piercing_orders", [])
 

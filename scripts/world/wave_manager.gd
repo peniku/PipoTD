@@ -54,8 +54,11 @@ static func describe_wave(n: int) -> Dictionary:
 	var gold: float = (float(kg.get("base", 3)) + float(kg.get("growth_per_wave", 0.5)) * (n - 1))
 	gold *= float(tp.get("gold_mult", 1.0))
 
+	var fac: Dictionary = GameData.faction(order)
 	return {
 		"wave": n,
+		"faction": str(fac.get("name", "")),
+		"boss_name": str(fac.get("boss", "")),
 		"type": wave_type,
 		"order": order,
 		"count": int(tp.get("count", 10)),

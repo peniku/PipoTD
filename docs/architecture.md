@@ -26,10 +26,19 @@ PipoTd/
 │   │   ├── enemy.gd         # inimigo (PathFollow3D)
 │   │   ├── tower.gd         # torre
 │   │   └── projectile.gd    # projétil
-│   └── ui/
-│       └── hud.gd           # interface da partida
+│   ├── ui/
+│   │   └── hud.gd           # interface da partida (tema medieval)
+│   └── visual/              # SÓ visual, sem regra de jogo
+│       ├── art.gd           # Art: materiais, texturas de ruído, malhas, partículas
+│       ├── world_builder.gd # céu, luz, terreno, estrada, portal, castelo, floresta
+│       ├── tower_model.gd   # TowerModel: modelo 3D de cada torre
+│       ├── enemy_model.gd   # EnemyModel: modelo 3D de cada facção
+│       └── vfx.gd           # VFX: explosões, clarões, "+ouro"
+├── shaders/
+│   └── portal.gdshader      # redemoinho do portal
 ├── tests/
-│   └── smoke_test.tscn/.gd  # teste automático
+│   ├── smoke_test.tscn/.gd  # teste automático
+│   └── screenshot.tscn/.gd  # capturas de tela para revisar o visual
 ├── assets/models/           # modelos 3D (vazio por enquanto)
 ├── addons/                  # plugins (painel de balanceamento no futuro)
 └── docs/                    # esta documentação
@@ -83,7 +92,15 @@ Main (Node3D, main.gd)
 
 ## Lógica × visual
 
-Hoje cada entidade tem sua lógica e seu visual no mesmo script, mas o visual fica isolado em funções `_build_visual` / `_rebuild_visual` com formas simples. Para trocar por modelos 3D basta mexer nessas funções. Antes do multiplayer está previsto separar totalmente a simulação do visual (ver [todo.md](todo.md), Fase 6).
+Tudo que é só aparência mora em `scripts/visual/` e é chamado pelas entidades:
+- `Tower` cria um `TowerModel` e chama `on_fire()` ao disparar.
+- `Enemy` cria um `EnemyModel` e chama `animate()` a cada frame; ao morrer chama `VFX.impact` / `VFX.float_text`.
+- `Projectile` desenha flecha/pedra/magia e chama `VFX.impact` no impacto.
+- `main.gd` chama `WorldBuilder.build()` uma vez.
+
+Trocar por modelos 3D reais = mexer só nesses arquivos.
+
+Antes do multiplayer está previsto separar totalmente a simulação do visual (ver [todo.md](todo.md), Fase 6).
 
 ## Detalhes por sistema
 Ver a pasta [systems/](README.md#sistemas-como-cada-parte-funciona-no-código).

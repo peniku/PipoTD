@@ -15,6 +15,7 @@ var _towers: Dictionary = {}           # Vector2i -> Tower
 var _cursor: MeshInstance3D
 var _cursor_mat: StandardMaterial3D
 var _selected_marker: MeshInstance3D
+var _overlay: MultiMeshInstance3D
 
 
 ## Calcula quais células podem receber torres a partir do mapa.
@@ -112,7 +113,7 @@ func _build_overlay() -> void:
 	var mat := StandardMaterial3D.new()
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	mat.albedo_color = Color(1, 1, 1, 0.07)
+	mat.albedo_color = Color(1.0, 0.85, 0.5, 0.09)
 	quad.material = mat
 
 	var mm := MultiMesh.new()
@@ -126,15 +127,24 @@ func _build_overlay() -> void:
 	var mmi := MultiMeshInstance3D.new()
 	mmi.name = "GridOverlay"
 	mmi.multimesh = mm
+	mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	mmi.visible = false
 	add_child(mmi)
+	_overlay = mmi
+
+
+## Mostra/esconde os quadrados de onde dá para construir (aparece só no modo de construção).
+func show_overlay(visible_flag: bool) -> void:
+	if _overlay:
+		_overlay.visible = visible_flag
 
 
 func _build_cursor() -> void:
-	_cursor = _make_square(Color(0.3, 1.0, 0.3, 0.35))
+	_cursor = _make_square(Color(1.0, 0.85, 0.4, 0.3))
 	_cursor_mat = _cursor.material_override
 	_cursor.visible = false
 	add_child(_cursor)
-	_selected_marker = _make_square(Color(1.0, 0.85, 0.3, 0.5))
+	_selected_marker = _make_square(Color(1.0, 0.75, 0.25, 0.35))
 	_selected_marker.visible = false
 	add_child(_selected_marker)
 
@@ -152,7 +162,7 @@ func _make_square(color: Color) -> MeshInstance3D:
 	return m
 
 
-## Mostra o cursor sobre a célula: verde = livre, vermelho = não dá para construir.
+## Mostra o cursor sobre a célula: dourado = livre/tem torre, vermelho = não dá para construir.
 func show_hover(c: Vector2i, visible_flag: bool) -> void:
 	if not visible_flag or not _in_bounds(c):
 		_cursor.visible = false
@@ -160,9 +170,9 @@ func show_hover(c: Vector2i, visible_flag: bool) -> void:
 	_cursor.visible = true
 	_cursor.position = cell_to_world(c) + Vector3.UP * 0.04
 	if is_free(c) or tower_at(c) != null:
-		_cursor_mat.albedo_color = Color(0.3, 1.0, 0.3, 0.35)
+		_cursor_mat.albedo_color = Color(1.0, 0.85, 0.4, 0.3)
 	else:
-		_cursor_mat.albedo_color = Color(1.0, 0.3, 0.3, 0.35)
+		_cursor_mat.albedo_color = Color(0.9, 0.2, 0.15, 0.3)
 
 
 func show_selected(c: Vector2i, visible_flag: bool) -> void:

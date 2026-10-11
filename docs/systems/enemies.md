@@ -28,5 +28,5 @@ Um `PathFollow3D` filho da rota (`Route`). Andar = aumentar `progress` (metros p
 - `died(enemy, gold_reward)` — morreu; o `WaveManager` dá o ouro.
 - `reached_end(enemy)` — chegou ao castelo; o `WaveManager` tira vidas (`lives_lost`).
 
-## Visual provisório
-Cápsula colorida pela Ordem (cinza = sem Ordem); blindados ficam metálicos. Barra de vida que sempre olha para a câmera, de verde a vermelho.
+## Visual
+Modelo da facção (`scripts/visual/enemy_model.gd`, escolhido por `elements.json → factions.<ordem>.model`), animação de caminhada, barra de vida com fundo escuro que só aparece após o primeiro dano. Ao morrer: explosão de partículas e "+ouro" flutuando. Detalhes em [../art-direction.md](../art-direction.md#inimigos-facções).

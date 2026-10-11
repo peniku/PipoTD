@@ -4,7 +4,7 @@
 **Dados:** `data/maps/map_01.json`
 
 ## Como o mapa é montado
-O mapa inteiro vem do JSON; não existe cena de mapa desenhada à mão.
+O mapa inteiro vem do JSON; não existe cena de mapa desenhada à mão. A lógica (rota, grade) fica em `main.gd`/`build_grid.gd`; o visual (estrada, portal, castelo, floresta) em `scripts/visual/world_builder.gd`, configurado pelo bloco `scenery`.
 
 | Campo | Uso |
 |---|---|
@@ -17,16 +17,16 @@ O mapa inteiro vem do JSON; não existe cena de mapa desenhada à mão.
 | `build_grid.blocked_cells` | lista de `[coluna, linha]` bloqueadas à mão (decoração, rio…) |
 
 - Coordenadas: plano X/Z, Y é a altura. O centro do mapa é `(0, 0)`.
-- O primeiro ponto da rota é a **entrada** (marcador verde) e o último é o **castelo** (marcador vermelho).
-- A estrada é desenhada com uma caixa achatada por segmento (só visual; não tem colisão).
+- O primeiro ponto da rota é a **entrada** (portal mágico) e o último é o **castelo**. Ambos são orientados automaticamente pela direção da rota.
+- A estrada é calçamento de pedra por segmento (só visual; não tem colisão).
 
 ## Grade de construção (estilo Element TD)
 Em vez de lugares fixos, o chão inteiro é uma grade e o jogador constrói em **qualquer célula livre** em volta da rota.
 
 - A grade cobre `ground_size` dividido em células de `cell_size`. No mapa 1: 22 × 16 células de 2 m, das quais **248 são construíveis**.
 - Uma célula é bloqueada se o quadrado dela encostar na estrada (distância do centro à rota < `path_width/2 + cell_size/2 + road_clearance`), se estiver perto da entrada/castelo, ou se estiver em `blocked_cells`.
-- Células construíveis aparecem com um quadrado claro bem suave (desenhado com `MultiMesh`, leve mesmo com centenas de células).
-- **Cursor:** o quadrado sob o mouse fica verde (pode construir ou tem torre) ou vermelho (bloqueado).
+- Células construíveis aparecem com quadrados dourados suaves (`MultiMesh`) **só quando o jogador seleciona uma célula livre** (modo construção) — `show_overlay()`. No resto do tempo o chão fica limpo.
+- **Cursor:** o quadrado sob o mouse fica dourado (pode construir ou tem torre) ou vermelho (bloqueado).
 - **Seleção:** quadrado amarelo na célula clicada.
 
 ## Clique

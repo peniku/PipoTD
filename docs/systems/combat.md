@@ -9,14 +9,14 @@
 dano_final = dano_da_torre × multiplicador_de_Ordem × (1 − armadura)
 ```
 
-- A armadura é ignorada se a Ordem da torre estiver em `armor_piercing_orders` (hoje: Pedra) e também pelo dano de veneno.
+- A armadura é ignorada se a Ordem da torre estiver em `armor_piercing_orders` (hoje: Terra, id `pedra`) e também pelo dano de veneno.
 - A Ordem de dano de uma Dual é a **primeira** da lista `element` (decisão D-009).
 
 ## Multiplicador de Ordem
 Roda (`cycle`): cada Ordem é forte contra a seguinte.
 
 ```
-Sagrado → Necromancia → Gelo → Fogo → Druídico → Pedra → Sagrado
+Divino → Necromancia → Gelo → Fogo → Druídico → Terra → Divino
 ```
 
 | Situação | Multiplicador (`multipliers`) | Valor atual |

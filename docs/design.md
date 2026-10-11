@@ -1,6 +1,6 @@
 # PipoTd — Design do jogo
 
-Tower defense 3D com temática medieval, inspirado no **Element TD 2** (ETD2).
+Tower defense 3D de **fantasia medieval mágica inspirada em D&D** (conteúdo SRD 5.1), com tom sombrio e adulto, inspirado no **Element TD 2** (ETD2). Visual: [art-direction.md](art-direction.md).
 
 ## Decisões fechadas (2026-10-11)
 
@@ -11,6 +11,7 @@ Tower defense 3D com temática medieval, inspirado no **Element TD 2** (ETD2).
 | Rota | **Fixa** no início (mazing pode vir depois) |
 | Multiplayer | **Corrida "quem dura mais"**: cada jogador na sua rota, mesmas ondas. Outras interações (enviar inimigos, co-op) ficam para o futuro |
 | Balanceamento | Todos os números em arquivos de dados (`data/*.json`), editáveis por um painel |
+| Tema | Fantasia D&D (SRD 5.1), sombria, não infantil — decisão D-011 |
 
 ## Referência: como o ETD2 funciona
 
@@ -28,19 +29,19 @@ Tower defense 3D com temática medieval, inspirado no **Element TD 2** (ETD2).
 
 | ETD2 | PipoTd | Papel |
 |---|---|---|
-| Luz | **Sagrado** | dano alto, alvo único |
+| Luz | **Divino** (id `sagrado`) | dano alto, alvo único |
 | Trevas | **Necromancia** | dano enorme, lento, maldições |
 | Água | **Gelo** | desacelerar |
 | Fogo | **Fogo** | dano em área |
 | Natureza | **Druídico** | veneno, raízes, dano ao longo do tempo |
-| Terra | **Pedra** | atordoar, empurrar, dano contra armadura |
+| Terra | **Terra** (id `pedra`) | atordoar, empurrar, dano contra armadura |
 
 ### Roda de fraquezas
 
 Ciclo (cada um é forte contra o seguinte):
 
 ```
-Sagrado → Necromancia → Gelo → Fogo → Druídico → Pedra → Sagrado
+Divino → Necromancia → Gelo → Fogo → Druídico → Terra → Divino
 ```
 
 - Atacar o elemento do qual você é forte: multiplicador **forte** (inicial x2.0).
@@ -50,7 +51,7 @@ Sagrado → Necromancia → Gelo → Fogo → Druídico → Pedra → Sagrado
 
 ### Inimigos
 
-Cada facção tem uma Ordem (ex.: mortos-vivos = Necromancia, bestas da floresta = Druídico, gigantes de gelo = Gelo). Tipos de onda previstos: normal, rápida, massa, blindada, regeneração, chefe.
+Cada Ordem de onda é uma facção D&D: Horda Goblinoide (sem Ordem), Cruzados Caídos (Divino), Legião Morta-Viva (Necromancia), Gigantes do Gelo (Gelo), Hordas Infernais (Fogo), Bestas Selvagens (Druídico), Constructos de Pedra (Terra). Cada uma tem um chefe (Lich, Jarl do Gelo, Senhor Demônio…). Tabela completa em [art-direction.md](art-direction.md#inimigos-facções). Tipos de onda previstos: normal, rápida, massa, blindada, regeneração, chefe.
 
 ### Recursos
 

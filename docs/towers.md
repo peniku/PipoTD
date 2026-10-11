@@ -28,40 +28,42 @@ Quad / torre das 6 Ordens           ← futuro
 
 ## Lista (gerada a partir de `data/towers.json`)
 
+Os ids internos das Ordens continuam `sagrado` e `pedra`; na tela aparecem como **Divino** e **Terra**. Visual de cada camada: [art-direction.md](art-direction.md#torres).
+
 | Camada | Torre | Ordem(s) | Papel |
 |---|---|---|---|
-| base | Torre de Arqueiros (`arqueiros`) | — | alvo único barato |
+| base | Torre dos Arqueiros (`arqueiros`) | — | alvo único barato |
 | base | Catapulta (`catapulta`) | — | dano em área barato |
-| single_1 | Capela (`sagrado_1`) | sagrado | dano alto, alvo único |
-| single_2 | Igreja (`sagrado_2`) | sagrado | dano alto, alvo único |
-| single_3 | Catedral Radiante (`sagrado_3`) | sagrado | dano alto, alvo único |
-| single_1 | Altar Sombrio (`necromancia_1`) | necromancia | dano enorme, ataque lento |
-| single_2 | Cripta (`necromancia_2`) | necromancia | dano enorme, ataque lento |
-| single_3 | Torre do Lich (`necromancia_3`) | necromancia | dano enorme, ataque lento |
-| single_1 | Poço Gelado (`gelo_1`) | gelo | desacelera inimigos |
-| single_2 | Torre de Gelo (`gelo_2`) | gelo | desacelera inimigos |
-| single_3 | Bastião Glacial (`gelo_3`) | gelo | desacelera inimigos |
-| single_1 | Braseiro (`fogo_1`) | fogo | dano em área |
-| single_2 | Torre de Chamas (`fogo_2`) | fogo | dano em área |
-| single_3 | Fornalha Infernal (`fogo_3`) | fogo | dano em área |
-| single_1 | Círculo de Pedras (`druidico_1`) | druidico | veneno ao longo do tempo |
-| single_2 | Bosque Druídico (`druidico_2`) | druidico | veneno ao longo do tempo |
-| single_3 | Árvore Sagrada (`druidico_3`) | druidico | veneno ao longo do tempo |
-| single_1 | Trabuco (`pedra_1`) | pedra | atordoa, bom contra armadura |
-| single_2 | Baluarte (`pedra_2`) | pedra | atordoa, bom contra armadura |
-| single_3 | Fortaleza de Pedra (`pedra_3`) | pedra | atordoa, bom contra armadura |
-| dual | Eclipse (`sagrado_necromancia`) | sagrado + necromancia | alterna dano sagrado/sombrio; cobre a fraqueza dos dois |
-| dual | Santuário de Cristal (`sagrado_gelo`) | sagrado + gelo | raio que perfura vários inimigos em linha |
-| dual | Pira do Inquisidor (`sagrado_fogo`) | sagrado + fogo | dano alto em área pequena |
-| dual | Bosque Abençoado (`sagrado_druidico`) | sagrado + druidico | aumenta o dano das torres vizinhas (suporte) |
-| dual | Bastião dos Paladinos (`sagrado_pedra`) | sagrado + pedra | golpe pesado que atordoa o alvo |
-| dual | Cripta Gélida (`necromancia_gelo`) | necromancia + gelo | congela e amplifica o dano recebido |
-| dual | Fogo Infernal (`necromancia_fogo`) | necromancia + fogo | queimadura forte ao longo do tempo |
-| dual | Pântano Pestilento (`necromancia_druidico`) | necromancia + druidico | praga que espalha entre inimigos próximos |
-| dual | Mausoléu (`necromancia_pedra`) | necromancia + pedra | invoca esqueletos que bloqueiam a rota por instantes |
-| dual | Alquimista (`gelo_fogo`) | gelo + fogo | nuvem de vapor: área + lentidão |
-| dual | Pântano Congelado (`gelo_druidico`) | gelo + druidico | lentidão forte em área |
-| dual | Geleira (`gelo_pedra`) | gelo + pedra | avalanche periódica em área grande |
-| dual | Incêndio Florestal (`fogo_druidico`) | fogo + druidico | fogo que se espalha pelo caminho |
-| dual | Forja Anã (`fogo_pedra`) | fogo + pedra | canhão de alto dano em área |
-| dual | Ent Ancião (`druidico_pedra`) | druidico + pedra | raízes prendem inimigos (stun em área) |
+| single_1 | Capela do Clérigo (`sagrado_1`) | Divino | dano alto, alvo único |
+| single_2 | Templo do Paladino (`sagrado_2`) | Divino | dano alto, alvo único |
+| single_3 | Catedral Celestial (`sagrado_3`) | Divino | dano alto, alvo único |
+| single_1 | Altar Sombrio (`necromancia_1`) | Necromancia | dano enorme, ataque lento |
+| single_2 | Cripta do Necromante (`necromancia_2`) | Necromancia | dano enorme, ataque lento |
+| single_3 | Torre do Lich (`necromancia_3`) | Necromancia | dano enorme, ataque lento |
+| single_1 | Obelisco de Gelo (`gelo_1`) | Gelo | desacelera inimigos |
+| single_2 | Torre do Inverno (`gelo_2`) | Gelo | desacelera inimigos |
+| single_3 | Bastião Glacial (`gelo_3`) | Gelo | desacelera inimigos |
+| single_1 | Braseiro Arcano (`fogo_1`) | Fogo | dano em área |
+| single_2 | Torre do Evocador (`fogo_2`) | Fogo | dano em área |
+| single_3 | Pira Infernal (`fogo_3`) | Fogo | dano em área |
+| single_1 | Círculo Druídico (`druidico_1`) | Druídico | veneno ao longo do tempo |
+| single_2 | Bosque Antigo (`druidico_2`) | Druídico | veneno ao longo do tempo |
+| single_3 | Árvore Ancestral (`druidico_3`) | Druídico | veneno ao longo do tempo |
+| single_1 | Bastião Anão (`pedra_1`) | Terra | atordoa, bom contra armadura |
+| single_2 | Fortaleza da Montanha (`pedra_2`) | Terra | atordoa, bom contra armadura |
+| single_3 | Cidadela de Pedra Rúnica (`pedra_3`) | Terra | atordoa, bom contra armadura |
+| dual | Eclipse (`sagrado_necromancia`) | Divino + Necromancia | alterna dano sagrado/sombrio; cobre a fraqueza dos dois |
+| dual | Santuário de Cristal (`sagrado_gelo`) | Divino + Gelo | raio que perfura vários inimigos em linha |
+| dual | Pira do Inquisidor (`sagrado_fogo`) | Divino + Fogo | dano alto em área pequena |
+| dual | Bosque Abençoado (`sagrado_druidico`) | Divino + Druídico | aumenta o dano das torres vizinhas (suporte) |
+| dual | Bastião dos Paladinos (`sagrado_pedra`) | Divino + Terra | golpe pesado que atordoa o alvo |
+| dual | Cripta Gélida (`necromancia_gelo`) | Necromancia + Gelo | congela e amplifica o dano recebido |
+| dual | Fogo Infernal (`necromancia_fogo`) | Necromancia + Fogo | queimadura forte ao longo do tempo |
+| dual | Pântano Pestilento (`necromancia_druidico`) | Necromancia + Druídico | praga que espalha entre inimigos próximos |
+| dual | Mausoléu (`necromancia_pedra`) | Necromancia + Terra | invoca esqueletos que bloqueiam a rota por instantes |
+| dual | Alquimista (`gelo_fogo`) | Gelo + Fogo | nuvem de vapor: área + lentidão |
+| dual | Pântano Congelado (`gelo_druidico`) | Gelo + Druídico | lentidão forte em área |
+| dual | Geleira (`gelo_pedra`) | Gelo + Terra | avalanche periódica em área grande |
+| dual | Incêndio Florestal (`fogo_druidico`) | Fogo + Druídico | fogo que se espalha pelo caminho |
+| dual | Forja Anã (`fogo_pedra`) | Fogo + Terra | canhão de alto dano em área |
+| dual | Treant Ancião (`druidico_pedra`) | Druídico + Terra | raízes prendem inimigos (stun em área) |

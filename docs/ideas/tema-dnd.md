@@ -1,6 +1,6 @@
 # Proposta: universo inspirado em D&D
 
-**Status:** em discussão (2026-10-11). Nada implementado.
+**Status:** ✅ APROVADO e implementado em 2026-10-11 (decisão D-011). Resultado em [../art-direction.md](../art-direction.md).
 
 ## Ideia
 Usar o universo de fantasia de D&D como base temática: escolas de magia, classes, monstros clássicos.

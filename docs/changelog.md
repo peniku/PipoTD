@@ -2,6 +2,21 @@
 
 Tudo que foi feito no projeto, do mais recente para o mais antigo.
 
+## 2026-10-11 — Tema D&D e visual medieval mágico
+Pedido: "temática D&D, graficamente bonito, aparência medieval mágica, sem parecer jogo infantil".
+- **Tema D&D (SRD 5.1)**: Ordens na tela viram Divino/Necromancia/Gelo/Fogo/Druídico/Terra (ids internos mantidos); torres renomeadas (Capela do Clérigo, Torre do Lich, Torre do Evocador, Treant Ancião…); 7 **facções inimigas** com chefes em `elements.json → factions`.
+- **Cenário** (`scripts/visual/world_builder.gd`): céu crepuscular, sol baixo com sombras, SSAO, glow, névoa, terreno texturizado, estrada de calçamento, **portal** com redemoinho em shader, **castelo** com muralhas/torres/estandartes/tochas, floresta de pinheiros, rochas, grama, montanhas, partículas no ar. Configurável por `scenery` no mapa.
+- **Torres** (`scripts/visual/tower_model.gd`): torre de vigia, catapulta animada, torres de pedra com cristal mágico flutuante por Ordem, níveis com mais detalhes, Duais com dois cristais orbitando; pisca ao atirar.
+- **Inimigos** (`scripts/visual/enemy_model.gd`): goblin, cavaleiro caído, esqueleto, gigante do gelo, demônio, worg, golem; animação de caminhada; armadura nas ondas blindadas; chefes com coroa e aura.
+- **Projéteis e efeitos** (`projectile.gd`, `scripts/visual/vfx.gd`): flecha, pedra em arco, orbe mágico com rastro; explosões, onda de choque, "+ouro" flutuante.
+- **Interface**: tema medieval (bordas douradas, fonte serifada), anúncio de onda, Ordens com ◆◇.
+- **Câmera**: mais cinematográfica, gira com Q/E.
+- **Grade**: só aparece no modo construção.
+- `tests/screenshot.tscn`: gera capturas de tela (inclui galeria de inimigos). Imagens em `docs/images/`.
+- Godot 4.5.1 instalado em `E:\Projetos\Godot` no PC.
+- CLAUDE.md: regra de sempre fazer commit + push no GitHub.
+- Docs: novo art-direction.md; atualizados design, towers, data-reference, systems/*, manual, testing, setup, decisões D-011/D-012, CREDITS.md.
+
 ## 2026-10-11 — Grade de construção estilo Element TD
 - Os 29 lugares fixos (`BuildSlot`) foram substituídos por uma **grade** (`scripts/world/build_grid.gd`): o jogador constrói em qualquer célula livre em volta da rota. Mapa 1: 248 células construíveis.
 - Células que encostam na estrada, perto da entrada/castelo ou listadas em `blocked_cells` ficam bloqueadas.

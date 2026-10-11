@@ -21,8 +21,8 @@ Alvo = inimigo vivo, dentro do `range` (distância no plano X/Z), com **maior `p
 ## Números sempre do JSON
 `data()` devolve o dicionário da torre em `GameData` a cada uso. Depois de editar `towers.json`, aperte **F5** no jogo: torres já construídas passam a usar os valores novos e o visual é refeito.
 
-## Visual provisório
-Cilindro de pedra (mais alto conforme a camada: base 1,6 m → Dual 3,4 m) + "telhado" cônico na cor da Ordem (Duais têm dois). Catapulta tem um braço inclinado. Anel translúcido mostra o alcance quando selecionada.
+## Visual
+`scripts/visual/tower_model.gd` (classe `TowerModel`): torre de vigia, catapulta animada, torres de pedra com cristal flutuante na cor da Ordem, Duais com dois cristais. O cristal pisca ao disparar. Anel dourado mostra o alcance quando selecionada. O estilo do projétil (`arrow`, `boulder`, `magic`) sai de `_projectile_style`. Detalhes em [../art-direction.md](../art-direction.md#torres).
 
 ## Campos usados
 `id`, `name`, `tier`, `element`, `cost`, `damage`, `attack_speed`, `range`, `splash_radius`, `ability`, `requires`, `upgrades_to`, `role`. Detalhes em [../data-reference.md](../data-reference.md).

@@ -11,6 +11,9 @@ Abre a partida sem tela, com ouro infinito, e confere:
 5. vende uma torre e recebe ouro;
 6. roda 6 ondas até o fim;
 7. o castelo sobrevive.
+8. **idiomas**: `pt.json` e `en.json` têm as mesmas chaves; toda torre, Ordem e facção tem nome nos dois; trocar o idioma muda o HUD e os nomes;
+9. **menu** principal abre;
+10. **mira**: com 5 inimigos parados na estrada, cada modo (`first`, `last`, `strongest`, `weakest`, `closest`) escolhe o inimigo certo; a mira se mantém ao evoluir; T passa para o próximo modo.
 
 ### Rodar
 Na pasta do projeto:
@@ -43,6 +46,8 @@ Abre o jogo **com janela** (não funciona com `--headless`), monta uma defesa co
 
 - `--out=` pasta de saída (padrão: `user://screenshots`).
 - `--wave=` qual onda (facção) mostrar.
+- `--lang=en` / `--lang=pt`: tira as capturas naquele idioma (acrescenta `_en`/`_pt` ao nome do arquivo) e depois volta ao idioma que estava salvo.
+- `--menu`: captura o menu principal (`menu.png`).
 - `--gallery` em vez da defesa: uma criatura de cada facção parada na estrada, mais um chefe e um blindado → `gallery.png`.
 
 As imagens em `docs/images/` são usadas em [art-direction.md](art-direction.md).

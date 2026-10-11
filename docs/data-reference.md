@@ -10,7 +10,6 @@ Todos os números do jogo ficam em `data/`. Depois de editar, aperte **F5** com 
 | Campo | Tipo | Significado |
 |---|---|---|
 | `id` | texto | identificador único (`fogo_1`, `fogo_pedra`). Usado em `upgrades_to` |
-| `name` | texto | nome mostrado ao jogador |
 | `tier` | texto | `base`, `single_1`, `single_2`, `single_3`, `dual` |
 | `element` | `null`, texto ou lista | Ordem(ns). Dual = lista de 2; a primeira define o dano |
 | `cost` | inteiro | ouro para construir/evoluir para ela |
@@ -21,8 +20,9 @@ Todos os números do jogo ficam em `data/`. Depois de editar, aperte **F5** com 
 | `ability` | `null` ou objeto | habilidade (tipos em [systems/combat.md](systems/combat.md)) |
 | `requires` | objeto | níveis de Ordem exigidos, ex. `{"fogo": 1, "pedra": 1}` |
 | `upgrades_to` | lista de ids | evoluções possíveis a partir desta torre |
-| `targeting` | texto | prioridade de mira (hoje sempre `first`; uso futuro) |
-| `role` | texto | descrição curta do papel |
+| `targeting` | texto | modo de mira **inicial** da torre: `first`, `last`, `strongest`, `weakest` ou `closest` (o jogador pode trocar; ver [systems/towers.md](systems/towers.md#mira-escolhida-pelo-jogador)) |
+
+Nome e descrição da torre **não ficam aqui**: estão em `data/i18n/<idioma>.json` (`tower.<id>.name`, `tower.<id>.role`).
 
 **DPS** = `damage × attack_speed` (sem contar área nem multiplicadores).
 
@@ -37,10 +37,9 @@ Todos os números do jogo ficam em `data/`. Depois de editar, aperte **F5** com 
 | `multipliers.weak` | dano contra a Ordem que vence você |
 | `multipliers.neutral` | demais combinações |
 | `multipliers.vs_no_order` | dano de torre com Ordem em inimigo sem Ordem |
-| `display_names` | nomes de tela (`sagrado` → "Divino", `pedra` → "Terra") |
 | `colors` | cor de cada Ordem (`none` = sem Ordem), em hexadecimal |
 | `armor_piercing_orders` | Ordens que ignoram armadura |
-| `factions.<ordem>` | facção inimiga de cada Ordem (`none` = sem Ordem): `name` (nome da facção), `boss` (nome do chefe), `model` (modelo 3D: `goblin`, `knight`, `skeleton`, `giant`, `demon`, `beast`, `golem`) |
+| `factions.<ordem>` | facção inimiga de cada Ordem (`none` = sem Ordem): `model` (modelo 3D: `goblin`, `knight`, `skeleton`, `giant`, `demon`, `beast`, `golem`). Nomes da Ordem, facção e chefe ficam em `data/i18n/` (`order.*`, `faction.*`) |
 
 ---
 
@@ -85,3 +84,8 @@ Bloco `scenery` (só visual, ver [art-direction.md](art-direction.md#cenário)):
 | `rocks` | quantidade de rochas |
 | `grass_tufts` | tufos de grama |
 | `mountains` | montanhas ao fundo |
+
+---
+
+## `data/i18n/<idioma>.json`
+Textos do jogo, um arquivo por idioma (`pt.json`, `en.json`), no formato `{"chave": "texto"}`. Todos os idiomas precisam ter **as mesmas chaves**. Famílias de chaves e como adicionar textos/idiomas: [systems/localization.md](systems/localization.md).

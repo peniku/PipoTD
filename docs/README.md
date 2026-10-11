@@ -41,6 +41,8 @@ Mapa de toda a documentação. Comece por aqui.
 | [systems/combat.md](systems/combat.md) | Cálculo de dano, multiplicadores de Ordem, habilidades |
 | [systems/economy.md](systems/economy.md) | Ouro, juros, vidas, Favor Real, Ordens |
 | [systems/hud.md](systems/hud.md) | Interface da partida |
+| [systems/menu.md](systems/menu.md) | Menu principal (jogar, idioma, sair) |
+| [systems/localization.md](systems/localization.md) | Idiomas PT/EN: como os textos funcionam, como traduzir e adicionar idiomas |
 
 ## Ideias em discussão
 | Documento | O que tem |

@@ -22,6 +22,7 @@ O dono do projeto quer o projeto **perfeitamente documentado em Markdown**, para
 Toda alteração feita no projeto termina com **commit + push** para https://github.com/peniku/PipoTD (branch `main`), com a documentação já atualizada no mesmo commit. Nunca deixar trabalho só local.
 
 ## Regras de código
+- **Todo texto que o jogador vê passa por `Loc.t("chave")`** e existe em `data/i18n/pt.json` **e** `en.json` (ver docs/systems/localization.md). Nada de texto de tela escrito direto no código ou nos dados.
 - **Nenhum número de balanceamento fixo no código.** Dano, velocidade, alcance, custos, vidas, ondas: sempre em `data/*.json`, lidos via `GameData`.
 - Lógica do jogo separada do visual (facilita multiplayer no futuro).
 - GDScript tipado; comentários em português.

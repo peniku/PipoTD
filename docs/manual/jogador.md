@@ -3,12 +3,16 @@
 ## Objetivo
 Impedir que as hordas cheguem ao seu **castelo**. Elas saem de um **portal mágico** e seguem a estrada de pedra. Sobreviva às 55 ondas.
 
+## Menu principal
+Ao abrir o jogo aparece o menu: **Jogar**, **Idioma** (Português ⇄ English; a escolha fica salva) e **Sair**. Durante a partida, o botão **Menu** no canto superior direito volta para cá.
+
 ## Controles
 | Ação | Comando |
 |---|---|
 | Selecionar um lugar ou uma torre | clique esquerdo |
 | Cancelar seleção | clique direito ou Esc |
-| Iniciar a próxima onda | Espaço ou botão "Iniciar onda" |
+| Iniciar a próxima onda | Espaço ou botão "Chamar a onda" |
+| Trocar a mira da torre selecionada | T (ou os botões do painel) |
 | Mover a câmera | W A S D ou setas |
 | Girar a câmera | Q / E |
 | Zoom | roda do mouse |
@@ -20,7 +24,14 @@ Impedir que as hordas cheguem ao seu **castelo**. Elas saem de um **portal mági
 3. No fim de cada onda você recebe **juros** sobre o ouro guardado.
 4. Você começa com 1 **Favor Real** e ganha mais um a cada 5 ondas. Use na barra de baixo para comprar ou subir uma **Ordem**.
 5. Clique numa torre para **evoluir**: base → Ordem nível 1 → 2 → 3, ou combinar duas Ordens numa torre **Dual**.
-6. Vender devolve 75% de tudo que você gastou na torre.
+6. Demolir devolve 75% de tudo que você gastou na torre.
+7. Escolha a **mira** de cada torre no painel (ou tecla T):
+   - **Da frente**: o inimigo mais perto do castelo (padrão).
+   - **De trás**: o último da fila.
+   - **Mais HP**: o mais resistente — bom para torres de dano alto (Necromancia) e chefes.
+   - **Menos HP**: termina inimigos feridos.
+   - **Mais próximo**: o que está mais perto da torre.
+   A mira escolhida continua quando a torre evolui.
 
 ## As Ordens e as fraquezas
 Cada Ordem causa o dobro de dano na seguinte e metade na anterior:

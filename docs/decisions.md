@@ -2,6 +2,12 @@
 
 Cada decisão importante, com data e motivo. Nova decisão = nova entrada no topo.
 
+## D-015 · 2026-10-11 · Mira escolhida por torre (5 modos)
+Como em vários TDs modernos, cada torre tem seu modo: da frente, de trás, mais HP, menos HP, mais próximo. Fica na instância da torre (não no JSON), continua ao evoluir, troca pelo painel ou tecla T. O JSON guarda só o modo inicial (`targeting`).
+
+## D-014 · 2026-10-11 · Idiomas com JSON próprio (`Loc`) em vez do CSV do Godot
+O Godot tem tradução por CSV, mas ela exige o passo de importação do editor e esconde o texto em arquivos `.translation` gerados. Com `data/i18n/<idioma>.json` + o singleton `Loc`, os textos ficam em arquivos simples, editáveis e revisáveis, com fallback para o português e teste automático de chaves faltando. Nomes de tela saíram de `towers.json`/`elements.json` para que cada texto exista em um só lugar.
+
 ## D-013 · 2026-10-11 · Sempre publicar no GitHub
 Todo trabalho termina com commit + push em peniku/PipoTD, docs incluídas. Pedido do dono, para que o projeto esteja sempre atualizado em qualquer máquina/sessão.
 

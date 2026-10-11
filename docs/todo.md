@@ -48,9 +48,16 @@ Legenda: `[x]` feito · `[ ]` a fazer · `[~]` em andamento
 - [x] Renomear Ordens (Divino, Terra…), torres e criar 7 facções inimigas com chefes ([art-direction.md](art-direction.md))
 - [ ] Textos de lore curtos para cada facção e torre (tooltip / manual)
 
+## Idiomas e menu ✅
+- [x] Sistema de idiomas PT/EN (`Loc`, `data/i18n/`) ([systems/localization.md](systems/localization.md))
+- [x] Todos os textos do jogo traduzidos
+- [x] Menu principal com escolha de idioma salva ([systems/menu.md](systems/menu.md))
+- [ ] Tela de opções (volume, qualidade gráfica, idioma)
+- [ ] Traduzir o manual do jogador para inglês (docs/manual/player-en.md)
+
 ## Fase 3 — Conteúdo das torres
 - [ ] Implementar habilidades únicas das 15 Duais (hoje todas são `"todo"`) — ver [towers.md](towers.md)
-- [ ] Prioridades de mira configuráveis (primeiro, mais forte, mais perto)
+- [x] Mira configurável por torre: da frente, de trás, mais HP, menos HP, mais próximo (painel + tecla T) ([systems/towers.md](systems/towers.md#mira-escolhida-pelo-jogador))
 - [ ] Torres de suporte (aura de dano, aura de velocidade)
 - [ ] Projetar as 20 Triples (suporte × dano)
 - [ ] Primeira passada de balanceamento das 35 torres
@@ -88,7 +95,8 @@ Legenda: `[x]` feito · `[ ]` a fazer · `[~]` em andamento
 - [ ] Futuro: enviar inimigos ao adversário, co-op
 
 ## Fase 7 — Polimento e lançamento
-- [ ] Menu principal, opções, pausa
+- [x] Menu principal
+- [ ] Opções, pausa
 - [ ] Tutorial
 - [ ] Mais mapas
 - [ ] Nome definitivo do jogo

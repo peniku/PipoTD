@@ -70,17 +70,32 @@ func order_color(order) -> Color:
 	return Color.html(str(colors.get(key, "#ffffff")))
 
 
+## Nome de tela da Ordem no idioma atual (null = sem Ordem).
 func order_display_name(order) -> String:
-	if order == null:
-		return "Sem Ordem"
-	var names: Dictionary = elements.get("display_names", {})
-	return str(names.get(order, order))
+	return Loc.t("order.none" if order == null else "order.%s" % order)
 
 
-## Facção inimiga de uma Ordem (null = sem Ordem): {name, boss, model}.
+## Nome e descrição da torre no idioma atual (data/i18n).
+func tower_name(id: String) -> String:
+	return Loc.t("tower.%s.name" % id)
+
+
+func tower_role(id: String) -> String:
+	return Loc.t("tower.%s.role" % id)
+
+
+## Facção inimiga de uma Ordem (null = sem Ordem): {model}. Nomes via faction_name/boss_name.
 func faction(order) -> Dictionary:
 	var f: Dictionary = elements.get("factions", {})
-	return f.get("none" if order == null else str(order), {"name": "Inimigos", "boss": "Chefe", "model": "goblin"})
+	return f.get("none" if order == null else str(order), {"model": "goblin"})
+
+
+func faction_name(order) -> String:
+	return Loc.t("faction.%s.name" % ("none" if order == null else str(order)))
+
+
+func boss_name(order) -> String:
+	return Loc.t("faction.%s.boss" % ("none" if order == null else str(order)))
 
 
 func ignores_armor(order) -> bool:

@@ -3,7 +3,7 @@ extends Node
 ## Monta uma defesa variada, chama uma onda e salva PNGs.
 ##
 ## Rodar (precisa de janela, NÃO usar --headless):
-##   godot res://tests/screenshot.tscn -- --out=C:/caminho/pasta --wave=8
+##   godot res://tests/screenshot.tscn -- --out=C:/caminho/pasta --wave=8 [--lang=en] [--menu] [--gallery]
 ## Ver docs/testing.md.
 
 var main: Node
@@ -11,6 +11,9 @@ var out_dir := "user://screenshots"
 var wave_to_show := 8
 var frame := 0
 var gallery := false
+var menu_mode := false
+var _original_lang := ""
+var _suffix := ""
 var shots := [
 	{"frame": 150, "name": "overview", "yaw": 0.0, "height": 30.0, "target": Vector3(0, 0, 0)},
 	{"frame": 260, "name": "closeup", "yaw": 0.5, "height": 13.0, "target": Vector3(-4, 0, -4)},
@@ -26,32 +29,41 @@ func _ready() -> void:
 		elif arg == "--gallery":
 			gallery = true
 			shots = [{"frame": 90, "name": "gallery", "yaw": -0.35, "height": 7.0, "target": Vector3(-10, 0, -10)}]
+		elif arg == "--menu":
+			menu_mode = true
+			shots = [{"frame": 90, "name": "menu"}]
+		elif arg.begins_with("--lang="):
+			_original_lang = Loc.language
+			Loc.set_language(arg.substr(7))
+			_suffix = "_" + arg.substr(7)
 		elif arg.begins_with("--wave="):
 			wave_to_show = int(arg.substr(7))
 	DirAccess.make_dir_recursive_absolute(out_dir)
-	main = load("res://scenes/main.tscn").instantiate()
+	main = load("res://scenes/menu.tscn" if menu_mode else "res://scenes/main.tscn").instantiate()
 	add_child(main)
 
 
 func _process(_delta: float) -> void:
 	frame += 1
-	if frame == 3:
+	if frame == 3 and not menu_mode:
 		if gallery:
 			_gallery()
 		else:
 			_setup()
 	for s in shots:
-		if frame == int(s["frame"]) - 25:
+		if frame == int(s["frame"]) - 25 and not menu_mode:
 			main._cam_yaw = s["yaw"]
 			main._cam_height = s["height"]
 			main._cam_target = s["target"]
 			main._update_camera()
 		if frame == int(s["frame"]):
 			var img := get_viewport().get_texture().get_image()
-			var path: String = out_dir.path_join("%s.png" % s["name"])
+			var path: String = out_dir.path_join("%s%s.png" % [s["name"], _suffix])
 			img.save_png(path)
 			print("salvo: ", path)
 	if frame > int(shots[-1]["frame"]) + 2:
+		if _original_lang != "":
+			Loc.set_language(_original_lang)   # não muda a preferência do jogador
 		get_tree().quit()
 
 

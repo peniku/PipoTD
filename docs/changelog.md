@@ -2,6 +2,14 @@
 
 Tudo que foi feito no projeto, do mais recente para o mais antigo.
 
+## 2026-10-11 — Português/Inglês, menu principal e mira das torres
+- **Idiomas PT/EN**: novo singleton `Loc` (`scripts/autoload/loc.gd`) e textos em `data/i18n/pt.json` e `en.json` (136 chaves). Todo texto de tela passou a usar `Loc.t()`. Nomes de torres, Ordens e facções saíram de `towers.json`/`elements.json` e foram para os arquivos de idioma. O idioma fica salvo em `user://settings.cfg`; na primeira vez segue o idioma do sistema.
+- **Menu principal** (`scenes/menu.tscn`, agora a cena inicial): Jogar, Idioma (alterna e salva), Sair; fundo com o cenário do jogo, torres decorativas e câmera girando. Botão **Menu** no HUD e na tela de fim de jogo.
+- **Mira das torres**: 5 modos por torre (da frente, de trás, mais HP, menos HP, mais próximo), botões no painel da torre e tecla **T**; mantida ao evoluir. `targeting` em `towers.json` = modo inicial.
+- **Testes**: chaves iguais nos dois idiomas, nomes completos, troca de idioma no HUD, menu abre, os 5 modos de mira escolhem o inimigo certo.
+- **Capturas**: `--lang=` e `--menu` em `tests/screenshot.tscn`; imagens `menu_pt.png`, `menu_en.png`, `targeting_en.png`.
+- Docs: novos `systems/localization.md` e `systems/menu.md`; atualizados towers (tabela PT/EN), systems/towers (mira), hud, data-reference, architecture, manual, testing, CLAUDE.md (regra de textos), decisões D-014/D-015.
+
 ## 2026-10-11 — Tema D&D e visual medieval mágico
 Pedido: "temática D&D, graficamente bonito, aparência medieval mágica, sem parecer jogo infantil".
 - **Tema D&D (SRD 5.1)**: Ordens na tela viram Divino/Necromancia/Gelo/Fogo/Druídico/Terra (ids internos mantidos); torres renomeadas (Capela do Clérigo, Torre do Lich, Torre do Evocador, Treant Ancião…); 7 **facções inimigas** com chefes em `elements.json → factions`.

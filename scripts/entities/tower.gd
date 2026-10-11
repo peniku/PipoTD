@@ -5,8 +5,15 @@ class_name Tower
 ## altera torres já construídas. Ver docs/systems/towers.md.
 
 signal fired(tower: Tower)
+signal targeting_changed(tower: Tower)
+
+## Modos de mira (escolhidos pelo jogador no painel da torre ou com T):
+## first = mais adiantado na rota · last = mais atrás · strongest = mais HP
+## weakest = menos HP · closest = mais perto da torre. Ver docs/systems/towers.md.
+const TARGET_MODES := ["first", "last", "strongest", "weakest", "closest"]
 
 var tower_id: String = ""
+var targeting: String = "first"   # modo de mira desta torre (mantido ao evoluir)
 var total_spent: int = 0          # soma de tudo que foi gasto (para vender)
 var _cooldown: float = 0.0
 var _visual: TowerModel
@@ -17,6 +24,8 @@ var _muzzle_height: float = 2.0
 func setup(id: String, cost_paid: int) -> void:
 	tower_id = id
 	total_spent = cost_paid
+	var default_mode: String = str(GameData.get_tower(id).get("targeting", "first"))
+	targeting = default_mode if default_mode in TARGET_MODES else "first"
 
 
 func _ready() -> void:
@@ -47,27 +56,52 @@ func _process(delta: float) -> void:
 	var aps: float = float(t.get("attack_speed", 1.0))
 	if aps <= 0.0:
 		return
-	var target: Enemy = _find_target(float(t.get("range", 8.0)))
+	var target: Enemy = find_target(float(t.get("range", 8.0)))
 	if target == null:
 		return
 	_shoot(target, t)
 	_cooldown = 1.0 / aps
 
 
-## Alvo = inimigo vivo dentro do alcance que está mais adiantado na rota.
-func _find_target(range_m: float) -> Enemy:
+func set_targeting(mode: String) -> void:
+	if mode in TARGET_MODES and mode != targeting:
+		targeting = mode
+		targeting_changed.emit(self)
+
+
+## Passa para o próximo modo de mira (tecla T).
+func cycle_targeting() -> void:
+	set_targeting(TARGET_MODES[(TARGET_MODES.find(targeting) + 1) % TARGET_MODES.size()])
+
+
+## Escolhe o alvo entre os inimigos vivos dentro do alcance, conforme o modo
+## de mira (targeting). Empates: fica o mais adiantado na rota.
+func find_target(range_m: float) -> Enemy:
 	var best: Enemy = null
-	var best_progress: float = -1.0
+	var best_score: float = -INF
 	var my_pos := Vector2(global_position.x, global_position.z)
 	for e in get_tree().get_nodes_in_group("enemies"):
 		var enemy := e as Enemy
 		if enemy == null or not enemy.is_alive():
 			continue
-		var p := Vector2(enemy.global_position.x, enemy.global_position.z)
-		if my_pos.distance_to(p) <= range_m and enemy.progress > best_progress:
+		var dist: float = my_pos.distance_to(Vector2(enemy.global_position.x, enemy.global_position.z))
+		if dist > range_m:
+			continue
+		var score: float = _score(enemy, dist)
+		if best == null or score > best_score or (score == best_score and enemy.progress > best.progress):
 			best = enemy
-			best_progress = enemy.progress
+			best_score = score
 	return best
+
+
+## Quanto maior a nota, melhor o alvo para o modo atual.
+func _score(enemy: Enemy, dist: float) -> float:
+	match targeting:
+		"last": return -enemy.progress
+		"strongest": return enemy.hp
+		"weakest": return -enemy.hp
+		"closest": return -dist
+	return enemy.progress   # "first"
 
 
 func _shoot(target: Enemy, t: Dictionary) -> void:

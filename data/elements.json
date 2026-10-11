@@ -1,5 +1,5 @@
 {
-  "_doc": "Ordens (ids internos), roda de fraquezas, nomes de tela, cores, facções inimigas por Ordem. Ver docs/systems/combat.md e docs/art-direction.md.",
+  "_doc": "Ordens (ids internos), roda de fraquezas, cores, modelo 3D de cada facção. Nomes de tela ficam em data/i18n/. Ver docs/systems/combat.md e docs/art-direction.md.",
   "orders": [
     "sagrado",
     "necromancia",
@@ -22,14 +22,6 @@
     "neutral": 1.0,
     "vs_no_order": 0.8
   },
-  "display_names": {
-    "sagrado": "Divino",
-    "necromancia": "Necromancia",
-    "gelo": "Gelo",
-    "fogo": "Fogo",
-    "druidico": "Druídico",
-    "pedra": "Terra"
-  },
   "colors": {
     "none": "#9a9184",
     "sagrado": "#ffd77a",
@@ -44,38 +36,24 @@
   ],
   "factions": {
     "none": {
-      "name": "Horda Goblinoide",
-      "boss": "Senhor da Guerra Hobgoblin",
       "model": "goblin"
     },
     "sagrado": {
-      "name": "Cruzados Caídos",
-      "boss": "Paladino Caído",
       "model": "knight"
     },
     "necromancia": {
-      "name": "Legião Morta-Viva",
-      "boss": "Lich",
       "model": "skeleton"
     },
     "gelo": {
-      "name": "Gigantes do Gelo",
-      "boss": "Jarl dos Gigantes do Gelo",
       "model": "giant"
     },
     "fogo": {
-      "name": "Hordas Infernais",
-      "boss": "Senhor Demônio",
       "model": "demon"
     },
     "druidico": {
-      "name": "Bestas Selvagens",
-      "boss": "Urso-Coruja Alfa",
       "model": "beast"
     },
     "pedra": {
-      "name": "Constructos de Pedra",
-      "boss": "Golem Ancião",
       "model": "golem"
     }
   }

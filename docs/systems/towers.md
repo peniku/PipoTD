@@ -9,8 +9,22 @@
 3. **Evoluir** (`main._on_upgrade`): o painel lista `upgrades_to`. Exige `requires` (níveis de Ordem) e cobra o `cost` cheio da torre nova (decisão D-008). A torre troca de `tower_id` no lugar.
 4. **Vender** (`main._on_sell`): devolve `total_spent × sell_refund` (75%).
 
-## Mira
-Alvo = inimigo vivo, dentro do `range` (distância no plano X/Z), com **maior `progress`** (o mais perto do castelo). Prioridades configuráveis estão no to-do (Fase 3).
+## Mira (escolhida pelo jogador)
+Cada torre tem seu próprio modo de mira (`Tower.targeting`). O jogador troca no painel da torre (5 botões) ou com a tecla **T** (passa para o próximo). O modo **continua igual quando a torre evolui**. O modo inicial vem do campo `targeting` em `towers.json` (hoje `first` em todas).
+
+Entre os inimigos vivos dentro do `range` (distância no plano X/Z), a torre escolhe pela "nota" (`_score`):
+
+| Modo | Nome na tela | Escolhe |
+|---|---|---|
+| `first` | Da frente / First | o mais adiantado na rota (mais perto do castelo) |
+| `last` | De trás / Last | o mais atrás na rota |
+| `strongest` | Mais HP / Most HP | o que tem mais vida atual |
+| `weakest` | Menos HP / Least HP | o que tem menos vida atual |
+| `closest` | Mais próximo / Closest | o mais perto da torre |
+
+Empate: fica o mais adiantado na rota. Funções: `find_target(range)`, `set_targeting(mode)`, `cycle_targeting()`; sinal `targeting_changed`.
+
+![Painel de mira](../images/targeting_en.png)
 
 ## Projétil
 - Velocidade fixa de 28 m/s; persegue o alvo.

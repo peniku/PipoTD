@@ -39,7 +39,7 @@ func _ready() -> void:
 	waves.setup(path)
 	waves.wave_started.connect(_on_wave_started)
 	waves.wave_cleared.connect(func(_n): _refresh_wave_button())
-	waves.all_waves_cleared.connect(func(): hud.show_message("Vitória! Todas as ondas defendidas.", true))
+	waves.all_waves_cleared.connect(func(): hud.show_message(Loc.t("msg.victory"), true))
 
 	hud = HUD.new()
 	hud.name = "HUD"
@@ -48,6 +48,8 @@ func _ready() -> void:
 	hud.build_pressed.connect(_on_build)
 	hud.upgrade_pressed.connect(_on_upgrade)
 	hud.sell_pressed.connect(_on_sell)
+	hud.targeting_pressed.connect(_on_targeting)
+	hud.menu_pressed.connect(_go_to_menu)
 	hud.order_pressed.connect(func(o): GameState.upgrade_order(o))
 	hud.restart_pressed.connect(func(): get_tree().reload_current_scene())
 	GameState.game_over.connect(_on_game_over)
@@ -132,6 +134,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				_on_start_wave()
 			KEY_ESCAPE:
 				_select_cell(null)
+			KEY_T:
+				_cycle_targeting()
 			KEY_F5:
 				GameData.reload()  # recarrega data/*.json sem fechar o jogo
 
@@ -238,8 +242,32 @@ func _on_sell() -> void:
 	_select_cell(_selected_cell)
 
 
+## Muda o modo de mira da torre selecionada (botões do painel).
+func _on_targeting(mode: String) -> void:
+	if not _has_selection:
+		return
+	var tower: Tower = grid.tower_at(_selected_cell)
+	if tower:
+		tower.set_targeting(mode)
+		hud.show_tower(tower)
+
+
+## Tecla T: próximo modo de mira da torre selecionada.
+func _cycle_targeting() -> void:
+	if not _has_selection:
+		return
+	var tower: Tower = grid.tower_at(_selected_cell)
+	if tower:
+		tower.cycle_targeting()
+		hud.show_tower(tower)
+
+
+func _go_to_menu() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+
+
 func _on_game_over(wave_reached: int) -> void:
-	hud.show_message("O castelo caiu! Você chegou à onda %d." % wave_reached, true)
+	hud.show_message(Loc.t("msg.defeat", [wave_reached]), true)
 	_refresh_wave_button()
 
 
